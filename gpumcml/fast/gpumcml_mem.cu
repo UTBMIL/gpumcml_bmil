@@ -52,7 +52,7 @@ int InitDCMem(SimulationStruct *sim, UINT32 A_rz_overflow)
 
   LayerStructGPU h_layerspecs[MAX_LAYERS];
   
-  //GFLOAT data_1_tmp[MAX_DATA_NUM];/*add by zhuyc 20161005*/
+  GFLOAT data_1_tmp[MAX_DATA_NUM];/*add by zhuyc 20161005*/
 
   for (UINT32 i = 0; i < n_layers; ++i)
   {

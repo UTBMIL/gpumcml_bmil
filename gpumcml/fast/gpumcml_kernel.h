@@ -218,7 +218,7 @@ typedef struct __align__(16)
 
   GFLOAT gamma;					// add by zhuyc 20161003 // mod by Yao 20190117
 
-  //GFLOAT data[20+1];    //add by zhuyc 20161004
+  GFLOAT data[20+1];    //add by zhuyc 20161004
 
   GFLOAT cos_crit0, cos_crit1;
 } LayerStructGPU;
