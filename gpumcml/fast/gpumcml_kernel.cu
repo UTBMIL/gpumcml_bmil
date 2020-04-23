@@ -442,10 +442,10 @@ __device__ void Spin(GFLOAT g, GFLOAT a, GFLOAT *data, PhotonStructGPU *photon,
     /*add by zhuyc 20161004 begin*/
 	//if( (int(rand * MAX_DATA_NUM) > MAX_DATA_NUM)||(int(rand * MAX_DATA_NUM) < 0) ){printf("Error!!! rand exceeds![%f]\n",rand);rand = 0.999;}
     cost = data[int(rand * MAX_DATA_NUM)];	
-	if( (int(rand * MAX_DATA_NUM))%5000 == 0 )
-	{
-		printf("---DEBUG ZYC rand[%f],index[%d],cost[%f]\n",rand,int(rand * MAX_DATA_NUM)+1,cost);
-	}
+	// if( (int(rand * MAX_DATA_NUM))%5000 == 0 )
+	// {
+	// 	printf("---DEBUG ZYC rand[%f],index[%d],cost[%f]\n",rand,int(rand * MAX_DATA_NUM)+1,cost);
+	// }
     /*add by zhuyc 20161004 end*/
 
 #if 0 /*del by zhuyc 20161004 begin*/
