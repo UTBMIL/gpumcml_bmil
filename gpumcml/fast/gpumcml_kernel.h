@@ -193,7 +193,7 @@ typedef struct __align__(16)
   GFLOAT init_photon_w;      // initial photon weight 
 
   GFLOAT dz;                 // z grid separation.[cm] 
-  GFLOAT dr_log;                 // r grid separation.[cm] 
+  GFLOAT dr;                 // r grid separation.[cm] 
 
   UINT32 na;                // array range 0..na-1. 
   UINT32 nz;                // array range 0..nz-1. 
