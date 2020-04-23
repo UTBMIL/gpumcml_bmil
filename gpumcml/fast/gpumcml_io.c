@@ -20,7 +20,7 @@
 *   along with GPUMCML.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define NFLOATS 5
+#define NFLOATS 6  //mod by zhuyc 20161003 5->6
 #define NINTS 5
 
 #include <time.h>
@@ -108,7 +108,7 @@ void WriteInParm(FILE *file, SimulationStruct * sim)
   fprintf(file, "%s \tA\t\t# output file name, ASCII.\n", sim->outp_filename);
   fprintf(file, "%u \t\t\t# No. of photons\n", sim->number_of_photons);
   
-  fprintf(file, "%G\t%G\t\t# dz, dr [cm]\n", sim->det.dz, sim->det.dr);
+  fprintf(file, "%G\t%G\t\t# dz, dr_log[0] [cm]\n", sim->det.dz, sim->det.dr_log[0]);
   fprintf(file, "%u\t%u\t%u\t# No. of dz, dr, da.\n\n", sim->det.nz, sim->det.nr, sim->det.na);
   
   fprintf(file, "%u\t\t\t\t\t# Number of layers\n", sim->n_layers);
@@ -135,7 +135,7 @@ int Write_Simulation_Results(SimState* HostMem, SimulationStruct* sim,
   //char mystring[STR_LEN];
 
   // Copy stuff from sim->det to make things more readable:
-  double dr=(double)sim->det.dr;		// Detection grid resolution, r-direction [cm]
+  double dr=(double)sim->det.dr;
   double dz=(double)sim->det.dz;		// Detection grid resolution, z-direction [cm]
   double da=PI_const/(2*sim->det.na);		// Angular resolution [rad]
 
@@ -239,6 +239,7 @@ int Write_Simulation_Results(SimState* HostMem, SimulationStruct* sim,
 
   // Calculate and write Rd_r
   fprintf(pFile_outp,"\nRd_r #Rd[0], [1],..Rd[nr-1]. [1/cm2]\n");
+
   for(r=0;r<nr;r++)
   {
     temp=0;
@@ -343,7 +344,8 @@ int readfloats(int n_floats, float* temp, FILE* pFile)
     if(feof(pFile)) return 0; //if we reach EOF here something is wrong with the file!
     fgets(mystring , 200 , pFile);
     memset(temp,0,NFLOATS*sizeof(float));
-    ii=sscanf(mystring,"%f %f %f %f %f",&temp[0],&temp[1],&temp[2],&temp[3],&temp[4]);
+    //ii=sscanf(mystring,"%f %f %f %f %f",&temp[0],&temp[1],&temp[2],&temp[3],&temp[4]);  //del by zhuyc 20161003
+    ii=sscanf(mystring,"%f %f %f %f %f %f",&temp[0],&temp[1],&temp[2],&temp[3],&temp[4],&temp[5]);  //add by zhuyc 20161003
     if(ii>n_floats) return 0; 
     //if we read more number than defined something is wrong with the file!
     //printf("ii=%d temp=%f %f %f %f %f\n",ii,temp[0],temp[1],temp[2],temp[3],temp[4]);
@@ -370,6 +372,40 @@ int readints(int n_ints, int* temp, FILE* pFile) //replace with template?
   }
   return 1; // Everyting appears to be ok!
 }
+
+/*add by zhuyc 20161004 begin*/
+int read_data_file(int row, float *data)
+{
+  FILE * pFile;
+  int i=0;
+  int ii=0;
+  char mystring[200];
+  float temp[1];// 1 gamma mod by Yao 20190124
+
+  pFile = fopen("data.txt" , "r");
+  if (pFile == NULL){perror ("Error opening file");return 0;}
+
+  for(i=0; i<MAX_DATA_NUM; i++) //read MAX_DATA_NUM data from files
+  {
+	  ii = 0;
+	  while(ii<=0)
+	  {
+		if(feof(pFile)) return 0; //if we reach EOF here something is wrong with the file!
+		fgets(mystring , 200 , pFile);
+		memset(temp,0,1*sizeof(float));// 1 gamma mod by Yao 20190124
+		//ii=sscanf(mystring,"%f %f %f %f %f %f %f",&temp[0],&temp[1],&temp[2],&temp[3],&temp[4],&temp[5],&temp[6]); // 7 gamma mod by Yao 20100117
+		ii=sscanf(mystring,"%f",&temp[0]); // 1 gamma mod by Yao 20181203
+		data[i] = temp[row];
+		if(ii>7) return 0; 
+		//if we read more number than defined something is wrong with the file!
+		//printf("ii=%d temp=%f %f %f %f %f\n",ii,temp[0],temp[1],temp[2],temp[3],temp[4]);
+	  }
+  }
+  fclose(pFile);
+  return 1; // Everyting appears to be ok!
+}
+/*add by zhuyc 20161004 end*/
+
 
 int ischar(char a)
 {
@@ -398,6 +434,14 @@ int read_simulation_data(char* filename, SimulationStruct** simulations, int ign
   int itemp[NINTS];
 
   double n1, n2, r;
+
+  /*add by zhuyc 20161004 begin*/
+  float ferror = 0.0001;
+  int row = 0; 
+  int row_tmp = 0;
+  //float gamma[7] = {1.3,1.4,1.5,1.6,1.7,1.8,1.9}; // mod by Yao 20190117 7 gamma
+  float gamma[1] = {1}; // mod by Yao 20190223 gamma: column number!
+  /*add by zhuyc 20161004 end*/ // Mod by Yao 02142017
 
   pFile = fopen(filename , "r");
   if (pFile == NULL){perror ("Error opening file");return 0;}
@@ -461,7 +505,7 @@ int read_simulation_data(char* filename, SimulationStruct** simulations, int ign
     if(!readfloats(2, ftemp, pFile)){perror ("Error reading dr and dz");return 0;}
     //printf("dz=%f, dr=%f\n",ftemp[0],ftemp[1]);
     (*simulations)[i].det.dz=ftemp[0];
-    (*simulations)[i].det.dr=ftemp[1];
+    (*simulations)[i].det.dr=ftemp[1]; 
 
     // Read No. of dz, dr and da  (3x int)
     if(!readints(3, itemp, pFile)){perror ("Error reading No. of dz, dr and da");return 0;}
@@ -478,12 +522,12 @@ int read_simulation_data(char* filename, SimulationStruct** simulations, int ign
 
     // Allocate memory for the layers (including one for the upper and one for the lower)
     (*simulations)[i].layers = (LayerStruct*) malloc(sizeof(LayerStruct)*(n_layers+2));
-    if((*simulations)[i].layers == NULL){perror("Failed to malloc layers.\n");return 0;}
+    if((*simulations)[i].layers == NULL){perror("Failed to malloc layers. \n"); return 0;}
     //{printf("Failed to malloc simulations.\n");return 0;}
 
 
     // Read upper refractive index (1xfloat)
-    if(!readfloats(1, ftemp, pFile)){perror ("Error reading upper refractive index");return 0;}
+    if(!readfloats(1, ftemp, pFile)){perror ("Error reading upper refractive index"); return 0;}
     printf("Upper refractive index=%f\n",ftemp[0]);
     (*simulations)[i].layers[0].n=ftemp[0];
 
@@ -491,11 +535,13 @@ int read_simulation_data(char* filename, SimulationStruct** simulations, int ign
     for(ii=1;ii<=n_layers;ii++)
     {
       // Read Layer data (5x float)
-      if(!readfloats(5, ftemp, pFile)){perror ("Error reading layer data");return 0;}
-      printf("n=%f, mua=%f, mus=%f, g=%f, d=%f\n",ftemp[0],ftemp[1],ftemp[2],ftemp[3],ftemp[4]);
+      if(!readfloats(6, ftemp, pFile)){perror ("Error reading layer data"); printf("Error reading upper refractive index\n");return 0;} //mod by zhuyc 20161003 5->6
+      //printf("n=%f, mua=%f, mus=%f, g=%f, d=%f, a=%f\n",ftemp[0],ftemp[1],ftemp[2],ftemp[3],ftemp[4],ftemp[5]); //mod by zhuyc 20161003 printf a
+		printf("n=%f, mua=%f, mus=%f, g=%f, d=%f, gamma=%f\n",ftemp[0],ftemp[1],ftemp[2],ftemp[3],ftemp[4],ftemp[5]); //mod by Yao 02142017 printf gamma
       (*simulations)[i].layers[ii].n=ftemp[0];
       (*simulations)[i].layers[ii].mua=ftemp[1];
       (*simulations)[i].layers[ii].g=ftemp[3];
+      (*simulations)[i].layers[ii].gamma=ftemp[5]; //add by zhuyc 20161003
       (*simulations)[i].layers[ii].z_min=dtot;
       dtot+=ftemp[4];
       (*simulations)[i].layers[ii].z_max=dtot;
@@ -503,6 +549,21 @@ int read_simulation_data(char* filename, SimulationStruct** simulations, int ign
       else(*simulations)[i].layers[ii].mutr=1.0f/(ftemp[1]+ftemp[2]);
       //printf("mutr=%f\n",(*simulations)[i].layers[ii].mutr);
       //printf("z_min=%f, z_max=%f\n",(*simulations)[i].layers[ii].z_min,(*simulations)[i].layers[ii].z_max);
+
+	  /*add by zhuyc 20161004 begin*/
+	  for(row_tmp=0; row_tmp<1; row_tmp++) // mod by Yao 12032018
+	  {
+		if(fabs((*simulations)[i].layers[ii].gamma - gamma[row_tmp]) < ferror)// mod by Yao 02142017
+		{
+			row = row_tmp;
+			printf("gamma=[%f],row=[%d]\n",gamma[row_tmp],row+1);
+			break;
+		}
+	  }		
+	  if(!read_data_file(row, (*simulations)[i].layers[ii].data)){printf ("Error reading data !!!");}
+	  //printf("------DEBUG ZYC data[%f][%f][%f]\n",(*simulations)[i].layers[ii].data[0],(*simulations)[i].layers[ii].data[1],(*simulations)[i].layers[ii].data[19999]);
+	  /*add by zhuyc 20161004 end*/
+
     }//end ii<n_layers
 
     // Read lower refractive index (1xfloat)
