@@ -56,50 +56,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-__host__ __device__ UINT32 findClosest(GFLOAT arr[],int n, float target) 
-{ 
-  	
-	// Corner cases 
-	if (target <= arr[0]) 
-		return 0; 
-	if (target >= arr[n - 1]) 
-		return n-1; 
-
-	// Doing binary search 
-	int i = 0, j = n, mid = 0; 
-	while (i < j) { 
-		mid = (i + j) / 2; 
-
-		if ((arr[mid] - target) <=0.000001) 
-			return mid; 
-
-		/* If target is less than array element, 
-			then search in left */
-		if (target < arr[mid]) { 
-
-			// If target is greater than previous 
-			// to mid, return closest of two 
-			if (mid > 0 && target > arr[mid - 1]) 
-				return mid; 
-
-			/* Repeat for left half */
-			j = mid; 
-		} 
-
-		// If target is greater than mid 
-		else { 
-			if (mid < n - 1 && target < arr[mid + 1]) 
-				return mid; 
-			// update i 
-			i = mid + 1; 
-		} 
-	} 
-
-	// Only single element left after search 
-	// return arr[mid];
-	return 1;
-} 
-
 //////////////////////////////////////////////////////////////////////////////
 // This host routine computes the maximum element value of A_rz in shared
 // memory, that indicates an imminent overflow.
@@ -431,9 +387,9 @@ __device__ void FastReflectTransmit(PhotonStructGPU *photon,
         }
 
         UINT32 ia = acosf(uz2) * FP_TWO * RPI * d_simparam.na;
-		UINT32 ir = FAST_DIV(SQRT(photon->x*photon->x+photon->y*photon->y), d_simparam.dr);
+        UINT32 ir = FAST_DIV(SQRT(photon->x*photon->x+photon->y*photon->y), d_simparam.dr);
         if (ir >= d_simparam.nr) ir = d_simparam.nr - 1;
-        
+
         AtomicAddULL_Global(&ra_arr[ia * d_simparam.nr + ir],
           (UINT32)(photon->w * WEIGHT_SCALE));
  
@@ -486,10 +442,10 @@ __device__ void Spin(GFLOAT g, GFLOAT a, GFLOAT *data, PhotonStructGPU *photon,
     /*add by zhuyc 20161004 begin*/
 	//if( (int(rand * MAX_DATA_NUM) > MAX_DATA_NUM)||(int(rand * MAX_DATA_NUM) < 0) ){printf("Error!!! rand exceeds![%f]\n",rand);rand = 0.999;}
     cost = data[int(rand * MAX_DATA_NUM)];	
-	//if( (int(rand * MAX_DATA_NUM))%5000 == 0 )
-	//{
-	//	printf("---DEBUG ZYC rand[%f],index[%d],cost[%f]\n",rand,int(rand * MAX_DATA_NUM)+1,cost);
-	//}
+	if( (int(rand * MAX_DATA_NUM))%5000 == 0 )
+	{
+		printf("---DEBUG ZYC rand[%f],index[%d],cost[%f]\n",rand,int(rand * MAX_DATA_NUM)+1,cost);
+	}
     /*add by zhuyc 20161004 end*/
 
 #if 0 /*del by zhuyc 20161004 begin*/
@@ -660,22 +616,28 @@ __global__ void MCMLKernel(SimState d_state, GPUThreadStates tstates)
         photon.w -= dwa;
 
 		if (ignoreAdetection == 0)
-        {
+		{
 			// automatic __float2uint_rz
 			UINT32 iz = FAST_DIV(photon.z, d_simparam.dz);
 			// automatic __float2uint_rz
-			UINT32 ir = FAST_DIV(
-				SQRT(photon.x * photon.x + photon.y * photon.y),
-				d_simparam.dr);
+
+			if (ignoreAdetection == 0)
+        {
+          // automatic __float2uint_rz
+          UINT32 iz = FAST_DIV(photon.z, d_simparam.dz);
+          // automatic __float2uint_rz
+          UINT32 ir = FAST_DIV(
+            SQRT(photon.x * photon.x + photon.y * photon.y),
+            d_simparam.dr);
 
 			// Only record if photon is not at the edge!!
 			// This will be ignored anyways.
-			if (iz < d_simparam.nz && ir < d_simparam.nr)
-			{
-				UINT32 addr = ir * d_simparam.nz + iz;
+          if (iz < d_simparam.nz && ir < d_simparam.nr)
+          {
+            UINT32 addr = ir * d_simparam.nz + iz;
 
-				if (addr != last_addr)
-				{
+            if (addr != last_addr)
+            {
 #ifdef CACHE_A_RZ_IN_SMEM
               // Commit the weight drop to memory.
               if (last_ir < MAX_IR && last_iz < MAX_IZ)
@@ -828,5 +790,46 @@ __global__ void sum_A_rz(UINT64 *g_A_rz)
 
 #endif  // _GPUMCML_KERNEL_CU_
 
+__global__ UINT32 findClosest(float arr[],int n, float target) 
+{ 
+  	
+	// Corner cases 
+	if (target <= arr[0]) 
+		return 0; 
+	if (target >= arr[n - 1]) 
+		return n-1; 
 
+	// Doing binary search 
+	int i = 0, j = n, mid = 0; 
+	while (i < j) { 
+		mid = (i + j) / 2; 
+
+		if ((arr[mid] - target) <=0.000001) 
+			return mid; 
+
+		/* If target is less than array element, 
+			then search in left */
+		if (target < arr[mid]) { 
+
+			// If target is greater than previous 
+			// to mid, return closest of two 
+			if (mid > 0 && target > arr[mid - 1]) 
+				return mid; 
+
+			/* Repeat for left half */
+			j = mid; 
+		} 
+
+		// If target is greater than mid 
+		else { 
+			if (mid < n - 1 && target < arr[mid + 1]) 
+				return mid; 
+			// update i 
+			i = mid + 1; 
+		} 
+	} 
+
+	// Only single element left after search 
+	return arr[mid]; 
+} 
 

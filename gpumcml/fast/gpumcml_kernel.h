@@ -193,8 +193,7 @@ typedef struct __align__(16)
   GFLOAT init_photon_w;      // initial photon weight 
 
   GFLOAT dz;                 // z grid separation.[cm] 
-  GFLOAT dr;                 // r grid separation.[cm] 
-
+  GFLOAT dr_log;                 // r grid separation.[cm] 
 
   UINT32 na;                // array range 0..na-1. 
   UINT32 nz;                // array range 0..nz-1. 
@@ -218,7 +217,7 @@ typedef struct __align__(16)
 
   GFLOAT gamma;					// add by zhuyc 20161003 // mod by Yao 20190117
 
-  GFLOAT data[MAX_DATA_NUM];    //add by zhuyc 20161004
+  //GFLOAT data[20+1];    //add by zhuyc 20161004
 
   GFLOAT cos_crit0, cos_crit1;
 } LayerStructGPU;
