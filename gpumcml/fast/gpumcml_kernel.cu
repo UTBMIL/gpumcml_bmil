@@ -620,24 +620,18 @@ __global__ void MCMLKernel(SimState d_state, GPUThreadStates tstates)
 			// automatic __float2uint_rz
 			UINT32 iz = FAST_DIV(photon.z, d_simparam.dz);
 			// automatic __float2uint_rz
-
-			if (ignoreAdetection == 0)
-        {
-          // automatic __float2uint_rz
-          UINT32 iz = FAST_DIV(photon.z, d_simparam.dz);
-          // automatic __float2uint_rz
-          UINT32 ir = FAST_DIV(
-            SQRT(photon.x * photon.x + photon.y * photon.y),
-            d_simparam.dr);
+      UINT32 ir = FAST_DIV(
+        SQRT(photon.x * photon.x + photon.y * photon.y),
+        d_simparam.dr);
 
 			// Only record if photon is not at the edge!!
 			// This will be ignored anyways.
-          if (iz < d_simparam.nz && ir < d_simparam.nr)
-          {
-            UINT32 addr = ir * d_simparam.nz + iz;
+      if (iz < d_simparam.nz && ir < d_simparam.nr)
+      {
+        UINT32 addr = ir * d_simparam.nz + iz;
 
-            if (addr != last_addr)
-            {
+        if (addr != last_addr)
+        {
 #ifdef CACHE_A_RZ_IN_SMEM
               // Commit the weight drop to memory.
               if (last_ir < MAX_IR && last_iz < MAX_IZ)
