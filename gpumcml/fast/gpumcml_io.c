@@ -108,7 +108,7 @@ void WriteInParm(FILE *file, SimulationStruct * sim)
   fprintf(file, "%s \tA\t\t# output file name, ASCII.\n", sim->outp_filename);
   fprintf(file, "%u \t\t\t# No. of photons\n", sim->number_of_photons);
   
-  fprintf(file, "%G\t%G\t\t# dz, dr_log[0] [cm]\n", sim->det.dz, sim->det.dr_log[0]);
+  fprintf(file, "%G\t%G\t\t# dz, dr [cm]\n", sim->det.dz, sim->det.dr);
   fprintf(file, "%u\t%u\t%u\t# No. of dz, dr, da.\n\n", sim->det.nz, sim->det.nr, sim->det.na);
   
   fprintf(file, "%u\t\t\t\t\t# Number of layers\n", sim->n_layers);
