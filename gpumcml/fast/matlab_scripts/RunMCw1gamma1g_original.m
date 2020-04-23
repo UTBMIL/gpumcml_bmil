@@ -13,7 +13,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     mua_v  = [0.01]; % absorption vector (cm^-1)
 %     mua_v = linspace(0.01,5,10);
 
-    photons     = 1E7;   % Number of photon packets to simulate
+    photons     = 1E8;   % Number of photon packets to simulate
     n_above     = 1; % Refractive index of the medium above
     n_below     = 1.33;  % Refractive index of the medium below
     dz          = 0.01; % Spatial resolution of detection grid, z-direction [cm]
@@ -24,56 +24,60 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
 
     %% Sampling for MHG to generate inverse CDF in data.txt
     % (You can skip this step if you made a file for the current pair of g and gamma previously)
-    tic
-    N=20000;
-    epsilon=linspace(0,1,N); % Uniform Distribution
-    A=[];
+    if isfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'])
+        %skip this step if the file exists
+    else
+        tic
+        N=20000;
+        epsilon=linspace(0,1,N); % Uniform Distribution
+        A=[];
 
-    for Num=1:size(gamma,2)
-        g=(5*g1*gamma(Num) - 5*gamma(Num) + (25*g1^2*gamma(Num).^2 + 40*g1^2 - 50*g1*gamma(Num).^2 + 30*g1*gamma(Num) + 25*gamma(Num).^2 - 30*gamma(Num) + 9).^(1/2) + 3)/(10*g1);
-        a=g1./g;% Right value for Beta
+        for Num=1:size(gamma,2)
+            g=(5*g1*gamma(Num) - 5*gamma(Num) + (25*g1^2*gamma(Num).^2 + 40*g1^2 - 50*g1*gamma(Num).^2 + 30*g1*gamma(Num) + 25*gamma(Num).^2 - 30*gamma(Num) + 9).^(1/2) + 3)/(10*g1);
+            a=g1./g;% Right value for Beta
 
-        costC=zeros(N,1);
-        for time=1:N
-            randnum=epsilon(time);
-            costT = 0;
-            for x=linspace(-1,1,N)
-                derror = randnum-(a*(1-g*g)/(2*g)*((1+g*g-2*g*x)^(-0.5)-(1+g*g+2*g)^(-0.5))+(1-a)*(x*x*x+1)/(2));
-                if derror>0
-                    costT = x;
-                    continue
-                else
-                    costT = (x + costT)/2;
-                    break
+            costC=zeros(N,1);
+            for time=1:N
+                randnum=epsilon(time);
+                costT = 0;
+                for x=linspace(-1,1,N)
+                    derror = randnum-(a*(1-g*g)/(2*g)*((1+g*g-2*g*x)^(-0.5)-(1+g*g+2*g)^(-0.5))+(1-a)*(x*x*x+1)/(2));
+                    if derror>0
+                        costT = x;
+                        continue
+                    else
+                        costT = (x + costT)/2;
+                        break
+                    end
                 end
+                costC(time)=costT;
             end
-            costC(time)=costT;
+            A=[A costC];
+            % Plot
+            if Flag_Plot
+                figure
+                h0=histogram(costC,21,'Normalization','pdf');
+                hold on
+                %theoretical MHG phase function
+                cost0=linspace(-1,1,N);
+                pcost0=a*(1-g*g)./(2*(1+g*g-2*g*cost0).^(3/2))+(1-a)*3/(2)*cost0.*cost0;
+                plot(cost0,pcost0);
+                set(gca, 'YScale', 'log')
+                xlabel('cos(\theta)')
+                ylabel('probability')
+                legend('Sampling (Numeric/Discretized)','MHG phase function')
+                title(['g1=',num2str(g1),' gamma=',num2str(gamma(Num))])
+                xlim([-1 1])
+            end
         end
-        A=[A costC];
-        % Plot
-        if Flag_Plot
-            figure
-            h0=histogram(costC,21,'Normalization','pdf');
-            hold on
-            %theoretical MHG phase function
-            cost0=linspace(-1,1,N);
-            pcost0=a*(1-g*g)./(2*(1+g*g-2*g*cost0).^(3/2))+(1-a)*3/(2)*cost0.*cost0;
-            plot(cost0,pcost0);
-            set(gca, 'YScale', 'log')
-            xlabel('cos(\theta)')
-            ylabel('probability')
-            legend('Sampling (Numeric/Discretized)','MHG phase function')
-            title(['g1=',num2str(g1),' gamma=',num2str(gamma(Num))])
-            xlim([-1 1])
-        end
-    end
-    toc
+        toc
 
-    fileID = fopen(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'],'w');
-    formatSpec='%8.6f \n';
-    fprintf(fileID,formatSpec,A'); % Very important!!! Pay attention to the writing format!
-    fclose(fileID);
-    save(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
+        fileID = fopen(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'],'w');
+        formatSpec='%8.6f \n';
+        fprintf(fileID,formatSpec,A'); % Very important!!! Pay attention to the writing format!
+        fclose(fileID);
+        save(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
+    end
 
 
     %% Always run this to replace data.txt with the desired inverse CDF file
