@@ -26,7 +26,7 @@
 
 #define SINGLE_PRECISION
 
-#define MAX_DATA_NUM 200000 //add by zhuyc 20161008
+#define MAX_DATA_NUM 20000 //add by zhuyc 20161008
 
 
 //////////////////////////////////////////////////////////////////////////////

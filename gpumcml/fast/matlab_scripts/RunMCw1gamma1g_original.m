@@ -29,7 +29,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
 %     else
     if 1 == 1
         tic
-        N=200000;
+        N=20000;
         epsilon=linspace(0,1,N); % Uniform Distribution
         A=[];
 
