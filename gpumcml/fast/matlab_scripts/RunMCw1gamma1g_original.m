@@ -28,7 +28,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
         %skip this step if the file exists
     else
         tic
-        N=20000;
+        N=200000;
         epsilon=linspace(0,1,N); % Uniform Distribution
         A=[];
 
