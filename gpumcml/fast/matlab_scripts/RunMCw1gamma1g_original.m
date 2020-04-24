@@ -13,7 +13,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     mua_v  = [0.01]; % absorption vector (cm^-1)
 %     mua_v = linspace(0.01,5,10);
 
-    photons     = 1E7;   % Number of photon packets to simulate
+    photons     = 1E8;   % Number of photon packets to simulate
     n_above     = 1; % Refractive index of the medium above
     n_below     = 1.33;  % Refractive index of the medium below
     dz          = 0.01; % Spatial resolution of detection grid, z-direction [cm]
@@ -28,7 +28,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
         %skip this step if the file exists
     else
         tic
-        N=80000;
+        N=40000;
         epsilon=linspace(0,1,N); % Uniform Distribution
         A=[];
 
