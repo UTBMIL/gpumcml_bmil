@@ -392,9 +392,9 @@ int read_data_file(int row, float *data)
 	  {
 		if(feof(pFile)) return 0; //if we reach EOF here something is wrong with the file!
 		fgets(mystring , 200 , pFile);
-		memset(temp,0,1*sizeof(float));// 1 gamma mod by Yao 20190124
+		memset(temp,0,1*sizeof(double));// 1 gamma mod by Yao 20190124
 		//ii=sscanf(mystring,"%f %f %f %f %f %f %f",&temp[0],&temp[1],&temp[2],&temp[3],&temp[4],&temp[5],&temp[6]); // 7 gamma mod by Yao 20100117
-		ii=sscanf(mystring,"%f",&temp[0]); // 1 gamma mod by Yao 20181203
+		ii=sscanf(mystring,"%lf",&temp[0]); // 1 gamma mod by Yao 20181203
 		data[i] = temp[row];
 		if(ii>7) return 0; 
 		//if we read more number than defined something is wrong with the file!
