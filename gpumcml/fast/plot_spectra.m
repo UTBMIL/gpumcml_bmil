@@ -4,8 +4,8 @@ musp_vs = 1 * 10; %cm^-1
 gs = [.3];
 
 mua_v = 0.01
-gammas = linspace(0.95,1.27,3);
-% gammas = 0.95;
+% gammas = linspace(0.95,1.27,3);
+gammas = 0.95;
 % gammas = gammas(1:6);
 
 
