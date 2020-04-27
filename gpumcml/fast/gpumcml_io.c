@@ -380,7 +380,7 @@ int read_data_file(int row, double *data)
   int i=0;
   int ii=0;
   char mystring[200];
-  float temp[1];// 1 gamma mod by Yao 20190124
+  double temp[1];// 1 gamma mod by Yao 20190124
 
   pFile = fopen("data.txt" , "r");
   if (pFile == NULL){perror ("Error opening file");return 0;}
