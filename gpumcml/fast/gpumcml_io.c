@@ -374,7 +374,7 @@ int readints(int n_ints, int* temp, FILE* pFile) //replace with template?
 }
 
 /*add by zhuyc 20161004 begin*/
-int read_data_file(int row, float *data)
+int read_data_file(int row, double *data)
 {
   FILE * pFile;
   int i=0;
