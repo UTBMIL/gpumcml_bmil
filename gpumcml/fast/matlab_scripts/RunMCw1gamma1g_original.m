@@ -26,6 +26,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     % (You can skip this step if you made a file for the current pair of g and gamma previously)
     if isfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
         fprintf("skipping file")%skip this step if the file exists
+        load(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat']);
     else
         tic
         N=200000;
@@ -71,13 +72,13 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
             end
         end
         toc
-
-        fileID = fopen(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'],'w');
-        formatSpec='%8.6f \n';
-        fprintf(fileID,formatSpec,A'); % Very important!!! Pay attention to the writing format!
-        fclose(fileID);
-        save(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
     end
+    
+    fileID = fopen(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'],'w');
+    formatSpec='%8.6f \n';
+    fprintf(fileID,formatSpec,A'); % Very important!!! Pay attention to the writing format!
+    fclose(fileID);
+    save(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
 
 
     %% Always run this to replace data.txt with the desired inverse CDF file
