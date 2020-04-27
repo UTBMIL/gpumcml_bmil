@@ -106,7 +106,7 @@ typedef struct
   float gamma;				// Fractional contribution of the standard HG phase function, add by zhuyc 20161003
   float n;			  // Refractive index [-]
 
-  float data[MAX_DATA_NUM];  /*add by zhuyc 20161004*/
+  double data[MAX_DATA_NUM];  /*add by zhuyc 20161004*/
 } LayerStruct;
 
 // Detection Grid specifications
