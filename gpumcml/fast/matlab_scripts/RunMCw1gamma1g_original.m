@@ -24,8 +24,8 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
 
     %% Sampling for MHG to generate inverse CDF in data.txt
     % (You can skip this step if you made a file for the current pair of g and gamma previously)
-    if isfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'])
-        %skip this step if the file exists
+    if isfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
+        fprintf("skipping file")%skip this step if the file exists
     else
         tic
         N=200000;
