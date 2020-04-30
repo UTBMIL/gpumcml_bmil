@@ -128,9 +128,9 @@ fprintf(fid, '\n%d %d %d\t\t# No. of dz, dr & da',number_of_dz, number_of_dr, nu
 
 fprintf(fid, '\n\n%d\t\t\t# No. of layers',number_of_layers); % No. of layers
 fprintf(fid, '\n%f\t\t# n for medium above',n_above); % n for medium above.
-fprintf(fid, '\n#n mua mus g d gamma\t\t# One line for each layer');
+fprintf(fid, '\n#n mua mus g d\t\t# One line for each layer');
 for i=1:1:number_of_layers
-    fprintf(fid, '\n%g %g %g %g %g %g\t# layer %d',layers(i,1),layers(i,2),layers(i,3),layers(i,4),layers(i,5),layers(i,6),i); % layer i
+    fprintf(fid, '\n%g %g %g %g %g\t# layer %d',layers(i,1),layers(i,2),layers(i,3),layers(i,4),layers(i,5),i); % layer i
 end
 fprintf(fid, '\n%f\t\t# n for medium below',n_below); % n for medium below.
 
