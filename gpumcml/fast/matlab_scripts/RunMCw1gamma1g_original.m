@@ -9,13 +9,13 @@ function MCoutput = RunMCw1gamma1g_original(musp_vs,g1)
 
     mua_v  = [0.01]; % absorption vector (cm^-1)
 
-    photons     = 1E8;   % Number of photon packets to simulate
+    photons     = 1E7;   % Number of photon packets to simulate
     n_above     = 1; % Refractive index of the medium above
     n_below     = 1.33;  % Refractive index of the medium below
     dz          = 0.01; % Spatial resolution of detection grid, z-direction [cm]
-    dr          = 1*10^(-6); % Spatial resolution of detection grid, r-direction [cm]
+    dr          = 1*10^(-1); % Spatial resolution of detection grid, r-direction [cm]
     Ndz         = 1;   % Number of grid elements, z-direction
-    Ndr         = 1.5*10^6;  % Number of grid elements, r-direction
+    Ndr         = 1.5*10^1;  % Number of grid elements, r-direction
     Nda         = 1;    % Number of grid elements, angular-direction
 
     %% Run simulation one by one
