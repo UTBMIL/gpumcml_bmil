@@ -1,11 +1,11 @@
 close all; clc
 
 musp_vs = 1 * 10; %cm^-1
-gs = [.3];
+gs = [.9];
 
 mua_v = 0.01
 
-gammas = 0.95;
+% gammas = 0.95;
 
 fx = [.01 .025 .05:.05:1.8];
 
