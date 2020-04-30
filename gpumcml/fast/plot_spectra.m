@@ -1,7 +1,7 @@
 close all; clc
 
 musp_vs = 3 * 10; %cm^-1
-gs = [.3];
+gs = [.9];
 
 mua_v = 0.01
 % gammas = linspace(0.95,1.27,3);

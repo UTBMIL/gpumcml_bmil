@@ -20,7 +20,7 @@ thi = 0;
 % gammas = gammas(5);
 % musp_vs = linspace(1.0,6,50) * 10 %cm^-1
 % musp_vs = musp_vs(44:end);
-gs = [.3]
+gs = [.9]
 
 gammas = 0.95;
 % gammas = linspace(0.95,1.27,10);
