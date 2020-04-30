@@ -1,11 +1,12 @@
 close all; clc
 
-musp_vs = linspace(1.0,6,10) * 10; %cm^-1
+% musp_vs = linspace(1.0,6,10) * 10; %cm^-1
+musp_vs = 6 * 10;
 gs = [.9];
 
 mua_v = 0.01
 % gammas = linspace(0.95,1.27,3);
-gammas = 1.27;
+gammas = 1.9;
 % gammas = gammas(1:6);
 
 
