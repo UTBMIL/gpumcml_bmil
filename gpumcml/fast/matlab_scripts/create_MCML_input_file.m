@@ -60,7 +60,6 @@
 % -------------------------------------------------------------------------
 
 function h=create_MCML_input_file( filename,...            % Name of the created input (.mci) and output (.mco) files used to communicate with MCML
-                                   PhaseFunctionFilename,...            % Name of the phase function files used to communicate with MCML
                                    number_of_photons,...   % Number of photon packets to simulate
                                    layers,...              % Layers matrix (in units of centimeters)
                                    varargin);
