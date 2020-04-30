@@ -18,11 +18,11 @@ thi = 0;
 %gammas = linspace(0.95,1.27,3);
 % gammas = gammas(6:end)
 % gammas = gammas(5);
-% musp_vs = linspace(1.0,6,50) * 10 %cm^-1
+musp_vs = linspace(1.0,6,10) * 10 %cm^-1
 % musp_vs = musp_vs(44:end);
 gs = [.9]
 
-gammas = 0.95;
+gammas = 1.27;
 % gammas = linspace(0.95,1.27,10);
 % 
 % gammas = gammas(2:end-1);
@@ -35,7 +35,7 @@ gammas = 0.95;
 
 %%
 % gammas = 0.95;
-musp_vs = 3*10;
+% musp_vs = 3*10;
 % gs = .07;
 
 % gammas = [1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9];%[1.65, 1.75, 1.85, 1.95]
