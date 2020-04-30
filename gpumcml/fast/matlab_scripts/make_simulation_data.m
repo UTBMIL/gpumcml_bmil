@@ -12,9 +12,6 @@ musp_vs = 1*10;
 
 
 for g = gs
-    if gam > 1 + g
-        continue
-    end
 
     musp_v_cm = musp_vs;
 
