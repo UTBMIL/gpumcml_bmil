@@ -1,11 +1,11 @@
 close all; clc
 
-musp_vs = 3 * 10; %cm^-1
+musp_vs = linspace(1.0,6,10) * 10; %cm^-1
 gs = [.9];
 
 mua_v = 0.01
 % gammas = linspace(0.95,1.27,3);
-gammas = 0.95;
+gammas = 1.27;
 % gammas = gammas(1:6);
 
 
@@ -23,12 +23,10 @@ for gam = gammas
 %                 R_MCM_data = load(['Test_12_1/SFDR/SFDR_mu_' num2str(musp_v_cm) '_gamma_' num2str(gam) '_g_' num2str(g) '.mat']);
 
                 X = R_MCM_data.SFDR_1Y;
-%                 mycolor = vals2colormap(gam, 'jet', [min(gammas), max(gammas)]);
-%                 mycolor = 'b'
-%                 semilogy(fx,X,'color',mycolor)
-%                 figure()
-                semilogy(fx,X)
-                hold all;
+                mycolor = vals2colormap(musp_v_cm, 'jet', [min(musp_vs), max(musp_vs)])
+               
+                semilogy(fx,X,'color',mycolor)
+                hold on;
                 
             end
         end
