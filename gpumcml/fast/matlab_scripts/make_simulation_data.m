@@ -4,7 +4,7 @@ mua_e = 0.01;
 mua_d = 0;
 thi = 0;
 
-gs = [.9];
+gs = [.3];
 
 musp_vs = 1*10;
 
