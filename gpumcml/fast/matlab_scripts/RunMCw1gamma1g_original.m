@@ -29,7 +29,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     epsilon=linspace(0,1,N); % Uniform Distribution
     A=[];
 
-    if isfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
+    if isfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'])
         %do nothing
     else
         for Num=1:size(gamma,2)
@@ -76,12 +76,12 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
         formatSpec='%8.6f \n';
         fprintf(fileID,formatSpec,A'); % Very important!!! Pay attention to the writing format!
         fclose(fileID);
-        save(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
+%         save(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
     end
 
 
     %% Always run this to replace data.txt with the desired inverse CDF file
-    movefile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'],'data.txt')
+    copyfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'],'data.txt')
 
 
     %% Run simulation one by one
