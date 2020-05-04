@@ -1,6 +1,6 @@
 clear all; close all; clc
 
-musp_vs = 3 * 10; %cm^-1
+musp_vs = 1 * 10; %cm^-1
 gs = [.9];
 
 mua_v = 0.01
