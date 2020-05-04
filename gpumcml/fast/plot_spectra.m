@@ -1,7 +1,7 @@
 close all; clc
 
 % musp_vs = linspace(1.0,6,10) * 10; %cm^-1
-musp_vs = 6 * 10;
+musp_vs = 1 * 10;
 gs = [.9];
 
 mua_v = 0.01
@@ -25,7 +25,7 @@ for gam = gammas
 
                 X = R_MCM_data.SFDR_1Y;
                 mycolor = vals2colormap(musp_v_cm, 'jet', [min(musp_vs), max(musp_vs)])
-               
+                mycolor = 'r';
                 semilogy(fx,X,'color',mycolor)
                 hold on;
                 

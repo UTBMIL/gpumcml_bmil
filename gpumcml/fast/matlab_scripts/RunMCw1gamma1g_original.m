@@ -29,51 +29,55 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     epsilon=linspace(0,1,N); % Uniform Distribution
     A=[];
 
-    for Num=1:size(gamma,2)
-        g=(5*g1*gamma(Num) - 5*gamma(Num) + (25*g1^2*gamma(Num).^2 + 40*g1^2 - 50*g1*gamma(Num).^2 + 30*g1*gamma(Num) + 25*gamma(Num).^2 - 30*gamma(Num) + 9).^(1/2) + 3)/(10*g1);
-        a=g1./g;% Right value for Beta
+    if isfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
+        %do nothing
+    else
+        for Num=1:size(gamma,2)
+            g=(5*g1*gamma(Num) - 5*gamma(Num) + (25*g1^2*gamma(Num).^2 + 40*g1^2 - 50*g1*gamma(Num).^2 + 30*g1*gamma(Num) + 25*gamma(Num).^2 - 30*gamma(Num) + 9).^(1/2) + 3)/(10*g1);
+            a=g1./g;% Right value for Beta
 
-        costC=zeros(N,1);
-        for time=1:N
-            randnum=epsilon(time);
-            costT = 0;
-            for x=linspace(-1,1,N)
-                derror = randnum-(a*(1-g*g)/(2*g)*((1+g*g-2*g*x)^(-0.5)-(1+g*g+2*g)^(-0.5))+(1-a)*(x*x*x+1)/(2));
-                if derror>0
-                    costT = x;
-                    continue
-                else
-                    costT = (x + costT)/2;
-                    break
+            costC=zeros(N,1);
+            for time=1:N
+                randnum=epsilon(time);
+                costT = 0;
+                for x=linspace(-1,1,N)
+                    derror = randnum-(a*(1-g*g)/(2*g)*((1+g*g-2*g*x)^(-0.5)-(1+g*g+2*g)^(-0.5))+(1-a)*(x*x*x+1)/(2));
+                    if derror>0
+                        costT = x;
+                        continue
+                    else
+                        costT = (x + costT)/2;
+                        break
+                    end
                 end
+                costC(time)=costT;
             end
-            costC(time)=costT;
+            A=[A costC];
+            % Plot
+            if Flag_Plot
+                figure
+                h0=histogram(costC,21,'Normalization','pdf');
+                hold on
+                %theoretical MHG phase function
+                cost0=linspace(-1,1,N);
+                pcost0=a*(1-g*g)./(2*(1+g*g-2*g*cost0).^(3/2))+(1-a)*3/(2)*cost0.*cost0;
+                plot(cost0,pcost0);
+                set(gca, 'YScale', 'log')
+                xlabel('cos(\theta)')
+                ylabel('probability')
+                legend('Sampling (Numeric/Discretized)','MHG phase function')
+                title(['g1=',num2str(g1),' gamma=',num2str(gamma(Num))])
+                xlim([-1 1])
+            end
         end
-        A=[A costC];
-        % Plot
-        if Flag_Plot
-            figure
-            h0=histogram(costC,21,'Normalization','pdf');
-            hold on
-            %theoretical MHG phase function
-            cost0=linspace(-1,1,N);
-            pcost0=a*(1-g*g)./(2*(1+g*g-2*g*cost0).^(3/2))+(1-a)*3/(2)*cost0.*cost0;
-            plot(cost0,pcost0);
-            set(gca, 'YScale', 'log')
-            xlabel('cos(\theta)')
-            ylabel('probability')
-            legend('Sampling (Numeric/Discretized)','MHG phase function')
-            title(['g1=',num2str(g1),' gamma=',num2str(gamma(Num))])
-            xlim([-1 1])
-        end
-    end
-    toc
+        toc
 
-    fileID = fopen(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'],'w');
-    formatSpec='%8.6f \n';
-    fprintf(fileID,formatSpec,A'); % Very important!!! Pay attention to the writing format!
-    fclose(fileID);
-    save(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
+        fileID = fopen(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'],'w');
+        formatSpec='%8.6f \n';
+        fprintf(fileID,formatSpec,A'); % Very important!!! Pay attention to the writing format!
+        fclose(fileID);
+        save(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
+    end
 
 
     %% Always run this to replace data.txt with the desired inverse CDF file
