@@ -19,7 +19,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     dz          = 0.01; % Spatial resolution of detection grid, z-direction [cm]
     dr          = 1*10^(-5); % Spatial resolution of detection grid, r-direction [cm]
     Ndz         = 1;   % Number of grid elements, z-direction
-    Ndr         = 1.5*10^5;  % Number of grid elements, r-direction
+    Ndr         = 1.5*10^5*2;  % Number of grid elements, r-direction
     Nda         = 1;    % Number of grid elements, angular-direction
 
     %% Sampling for MHG to generate inverse CDF in data.txt
