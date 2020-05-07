@@ -6,9 +6,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     %% Input parameters
 %     g1 = 0.9; % fix g1
     % gamma = 2.14; % Note that you can input Only One value for gamma in this program
-    if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
-        return 0;
-    end
+    
 
     Flag_Plot = 0; % 1: Plot the histogram of the scattering angles to check the phase function; 0: no plotting
 
@@ -95,6 +93,11 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
         thi = 0;
         for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
             for musp_v = musp_vs
+                if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
+                    continue;
+                end
+                
+                
                 mus = musp_v/(1-g);
                 %% Create Input File for MCML
                 %             n         mua     mus     g   d    gamma
