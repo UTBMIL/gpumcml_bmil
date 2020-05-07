@@ -6,6 +6,9 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     %% Input parameters
 %     g1 = 0.9; % fix g1
     % gamma = 2.14; % Note that you can input Only One value for gamma in this program
+    if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
+        return 0;
+    end
 
     Flag_Plot = 0; % 1: Plot the histogram of the scattering angles to check the phase function; 0: no plotting
 
