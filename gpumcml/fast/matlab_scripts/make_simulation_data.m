@@ -20,15 +20,14 @@ thi = 0;
 % gammas = gammas(5);
 %musp_vs = 1*10; %cm^-1
 % musp_vs = musp_vs(44:end);
-gs = [.9]
 
-%gammas = 1.9;
 gammas = linspace(0.95,1.27,20);
-% 
-% gammas = gammas(2:end-1);
-% 
+%gammas = gammas(2:end-1);
 musp_vs = linspace(1.0,6,50) * 10; %cm^-1
-% 
+%musp_vs = musp_vs(2:end-1);
+gs = [.07, 0.1, .14, .3];
+%gs = [0.9];
+ 
 % musp_vs = musp_vs(2:end-1);
 % 
 % gs = [.85 .95];
