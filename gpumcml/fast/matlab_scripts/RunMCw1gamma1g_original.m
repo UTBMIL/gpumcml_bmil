@@ -27,7 +27,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     end
     
     if exist_flag == 1
-        fprintf("skipping")
+        fprintf("skipping \n")
         return;
     end
     
