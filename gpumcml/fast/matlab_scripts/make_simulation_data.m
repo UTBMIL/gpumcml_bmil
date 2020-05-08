@@ -99,12 +99,12 @@ close all;
 % for mua_e = linspace(0.01,5,10);
 for mua_e = 0.01
     for gam = gammas
-    %     if gam < 1.0847
-    %         continue
-    %     end
         for g = gs
             for musp_v_cm = musp_vs
                 if gam > 1 + g
+                    continue
+                end
+                if isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_gamma_' num2str(gam) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'])
                     continue
                 end
                 data = load(['Test/Simulation_gamma' num2str(gam) '_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat']);
