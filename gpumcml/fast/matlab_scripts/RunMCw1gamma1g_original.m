@@ -4,8 +4,30 @@
 
 function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     %% Input parameters
-%     g1 = 0.9; % fix g1
-    % gamma = 2.14; % Note that you can input Only One value for gamma in this program
+    %First check if these files already all exist
+    %Default assumption is they do exist
+    exist_flag = 1;
+    
+    g       = g1;         % scattering anisotropy
+    gammas  = gamma;      % Gamma
+    for mua_e = mua_v
+        mua_d = 100;
+        thi = 0;
+        for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
+            for musp_v = musp_vs
+                if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
+                    continue;
+                else
+                    exist_flag = 0;
+                end
+            end
+        end
+    end
+    
+    if exist_flag == 1
+        fprintf("skipping")
+        return;
+    end
     
 
     Flag_Plot = 0; % 1: Plot the histogram of the scattering angles to check the phase function; 0: no plotting
@@ -94,8 +116,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
         for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
             for musp_v = musp_vs
                 if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
-                    fprintf("skipping")
-		    continue;
+                    continue;
                 end
                 
                 
