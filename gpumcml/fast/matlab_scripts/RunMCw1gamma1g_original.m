@@ -77,7 +77,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
         formatSpec='%8.6f \n';
         fprintf(fileID,formatSpec,A'); % Very important!!! Pay attention to the writing format!
         fclose(fileID);
-%         save(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
+        %save(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.mat'])
     end
 
 
@@ -94,7 +94,8 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
         for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
             for musp_v = musp_vs
                 if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
-                    continue;
+                    fprintf("skipping")
+		    continue;
                 end
                 
                 
