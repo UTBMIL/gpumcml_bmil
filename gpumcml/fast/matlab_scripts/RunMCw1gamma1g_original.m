@@ -4,6 +4,8 @@
 
 function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     %% Input parameters
+    mua_v  = [0.01]; % absorption vector (cm^-1)
+    
     %First check if these files already all exist
     %Default assumption is they do exist
     exist_flag = 1;
@@ -33,7 +35,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     Flag_Plot = 0; % 1: Plot the histogram of the scattering angles to check the phase function; 0: no plotting
 
     % musp_vs = [30];% reduced scattering vector (cm^-1)  (Test one value here but you can have multiple values)
-    mua_v  = [0.01]; % absorption vector (cm^-1)
+    
 %     mua_v = linspace(0.01,5,10);
 
     photons     = 1E7;   % Number of photon packets to simulate
