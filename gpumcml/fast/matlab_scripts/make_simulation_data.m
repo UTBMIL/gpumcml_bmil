@@ -22,7 +22,7 @@ musp_vs = 3.25*10; %cm^-1
 % musp_vs = musp_vs(44:end);
 
 % gammas = linspace(0.95,1.27,20);
-gamma = 0.93;
+gammas = 0.93;
 %gammas = gammas(2:end-1);
 % musp_vs = linspace(1.0,6,50) * 10; %cm^-1
 %musp_vs = musp_vs(2:end-1);
