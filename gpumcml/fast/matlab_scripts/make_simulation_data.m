@@ -83,9 +83,9 @@ gs = 0.93;
 
 for gam = gammas
     for g = gs
-        if gam > 1 + g
-            continue
-        end
+%         if gam > 1 + g
+%             continue
+%         end
 %         if gam < 1.0847
 %             continue
 %         end
@@ -103,9 +103,9 @@ for mua_e = 0.01
     for gam = gammas
         for g = gs
             for musp_v_cm = musp_vs
-                if gam > 1 + g
-                    continue
-                end
+%                 if gam > 1 + g
+%                     continue
+%                 end
                 if isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_gamma_' num2str(gam) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'])
                     continue
                 end
