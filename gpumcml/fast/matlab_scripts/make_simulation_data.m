@@ -27,23 +27,21 @@ end
 close all;
 
 
-for mua_e = 0.01
-    for g = gs
-        for musp_v_cm = musp_vs
-            data = load(['Test/Simulation_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat']);
+for i = 1:18
+    g = g1(i);
+    musp_v_cm = musp_vs(i);
+    data = load(['Test/Simulation_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat']);
 
-            fx = [.01 .025 .05:.05:1.8];
-
-
-            r_log = [data.dr:data.dr:data.dr*data.Ndr] * 10;
-            R_log = data.MCoutput.refl_r * 1/100;
+    fx = [.01 .025 .05:.05:1.8];
 
 
-            SFDR_1Y = ht(R_log,r_log,fx*2*pi);
+    r_log = [data.dr:data.dr:data.dr*data.Ndr] * 10;
+    R_log = data.MCoutput.refl_r * 1/100;
 
 
-            save(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'],'SFDR_1Y');
-        end
-    end
+    SFDR_1Y = ht(R_log,r_log,fx*2*pi);
+
+
+    save(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'],'SFDR_1Y');
 end
 
