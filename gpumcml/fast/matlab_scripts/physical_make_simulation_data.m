@@ -20,7 +20,7 @@ for i = 1:length(gammas)
 
     musp_v_cm = musp_vs(i);
 
-    RunMCw1gamma1g_original(gam,musp_v_cm,g) 
+    RunMCw1gamma1g_GK(gam,musp_v_cm,g) 
 end
 %%
 close all;
