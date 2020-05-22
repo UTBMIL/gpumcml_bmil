@@ -16,11 +16,11 @@ K = 1/pi * a * g * (1-g^2)^(2*a)*((1 + g)^(2*a) - (1 - g)^(2*a))^(-1);
 
 pGK = K*(1 + g^2 - 2*g*u).^(-(a + 1));
 
-g1 = -2 * pi * trapz(u, u.*pGK)
+g1 = -2 * pi * trapz(u, u.*pGK);
 
 
 
 g2 = 2*pi*trapz(angles, pGK.*sin(angles).*(1/2 * (3*(cos(angles)).^2 - 1)));
 
-gamma = (1 - g2)/(1 - g1)
+gamma = (1 - g2)/(1 - g1);
     

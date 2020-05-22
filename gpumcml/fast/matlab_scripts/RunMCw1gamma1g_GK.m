@@ -3,6 +3,11 @@
 % Yao Zhang
 
 function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1)
+    interpolant_data = load('g_interpolant')
+    g_map = interpolant_data.F;
+    interpolant_data_2 = load('a_interpolant')
+    a_map = interpolant_data_2.F2;
+
     %% Input parameters
     mua_v  = [0.01]; % absorption vector (cm^-1)\
     
@@ -63,10 +68,10 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1)
 
             costC=zeros(N,1);
             for time=1:N
-                aGK = .7025;
-                gGK = 0.8844;
-%                 aGK = 1/2;
-%                 gGK = 0.9;
+                
+                gGK = gmap(g1,gamma);
+                aGK = amap(g1,gamma);
+                
                 randnum=epsilon(time);
                 K = aGK*gGK*(1-gGK^2)^(2*aGK)/((1 + gGK)^(2*aGK) - (1 - gGK)^(2*aGK));
                 leci = aGK * gGK * randnum/K + (1 + gGK)^(-2*aGK);
