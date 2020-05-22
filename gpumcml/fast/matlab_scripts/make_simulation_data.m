@@ -1,6 +1,6 @@
 clear all; close all; clc
 
-mua_e = 0.01;
+mua_e = [0.01, 5];
 mua_d = 0;
 thi = 0;
 
@@ -21,12 +21,13 @@ thi = 0;
 %musp_vs = 1*10; %cm^-1
 % musp_vs = musp_vs(44:end);
 
-gammas = linspace(0.95,1.27,20);
+%gammas = linspace(0.95,1.27,20);
 %gammas = gammas(2:end-1);
-musp_vs = linspace(1.0,6,50) * 10; %cm^-1
+gammas = 1.9;
+musp_vs = linspace(1.0,35,2) * 10; %cm^-1
 %musp_vs = musp_vs(2:end-1);
-gs = [.07, 0.1, .14, .3];
-%gs = [0.9];
+%gs = [.07, 0.1, .14, .3];
+gs = [0.9];
  
 % musp_vs = musp_vs(2:end-1);
 % 
@@ -97,7 +98,7 @@ close all;
 % gammas = linspace(0.95,1.27,20);
 
 % for mua_e = linspace(0.01,5,10);
-for mua_e = 0.01
+for mua_e = [0.01,5]
     for gam = gammas
         for g = gs
             for musp_v_cm = musp_vs

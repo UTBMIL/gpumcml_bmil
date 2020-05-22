@@ -4,7 +4,7 @@
 
 function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     %% Input parameters
-    mua_v  = [0.01]; % absorption vector (cm^-1)
+    mua_v  = [0.01,5]; % absorption vector (cm^-1)
     
     %First check if these files already all exist
     %Default assumption is they do exist
