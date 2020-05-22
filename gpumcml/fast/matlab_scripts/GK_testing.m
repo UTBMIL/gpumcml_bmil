@@ -6,8 +6,8 @@ u = cos(angles);
 g1_goal = 0.93;
 gamma_goal = 2.08;
 
-gs = linspace(0.1,0.9);
-as = linspace(.5,4);
+gs = linspace(0.01,0.9,100);
+as = linspace(-0.9,4,100);
 
 allgs = zeros(1,length(gs)*length(as));
 allas = zeros(1,length(gs)*length(as));
@@ -41,6 +41,8 @@ for g = gs
 end
 
 scatter(allg1s, allgammas)
+hold all;
+plot(allg1s, allg1s + 1)
 
 xlabel('g1')
 ylabel('gamma')
@@ -49,3 +51,6 @@ F = scatteredInterpolant(allgammas',allg1s',allgs');
 F2 = scatteredInterpolant(allgammas',allg1s',allas');
 F(gamma_goal,g1_goal)
 F2(gamma_goal,g1_goal)
+
+save('a_interpolant','F')
+save('g_interpolant','F2')
