@@ -14,10 +14,6 @@ for i = 1:length(gammas)
     gam = gammas(i);
     g = g1(i);
     
-    if gam > 1 + g
-        continue
-    end
-
     musp_v_cm = musp_vs(i);
 
     RunMCw1gamma1g_GK(gam,musp_v_cm,g) 
@@ -31,10 +27,6 @@ for mua_e = 0.01
     for i = 1:length(gammas)
         gam = gammas(i);
         g = g1(i);
-
-        if gam > 1 + g
-            continue
-        end
 
         musp_v_cm = musp_vs(i);
         if isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_gamma_' num2str(gam) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'])
