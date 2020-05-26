@@ -4,9 +4,9 @@
 
 function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1)
     interpolant_data = load('g_interpolant')
-    g_map = interpolant_data.F;
+    gmap = interpolant_data.F;
     interpolant_data_2 = load('a_interpolant')
-    a_map = interpolant_data_2.F2;
+    amap = interpolant_data_2.F2;
 
     %% Input parameters
     mua_v  = [0.01]; % absorption vector (cm^-1)\
