@@ -1,12 +1,12 @@
 clear all; close all; clc
 
-mua_e = linspace(0.01,5,29);
+mua_e = linspace(0.28,4.55,9);
 mua_d = 0;
 thi = 0;
 
 gs = [.07, 0.1, .14, .3, 0.9];
 
-musp_vs = linspace(5,35,50);
+musp_vs = linspace(6.5,31.1,10);
 
 
 %%
