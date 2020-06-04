@@ -7,7 +7,7 @@ function MCoutput = RunMCw1gamma1g_original(musp_vs,g1)
 
     Flag_Plot = 0; % 1: Plot the histogram of the scattering angles to check the phase function; 0: no plotting
 
-    mua_v  = [0.01]; % absorption vector (cm^-1)
+    mua_v  = linspace(0.01,5,29); % absorption vector (cm^-1)
 
     photons     = 1E7;   % Number of photon packets to simulate
     n_above     = 1; % Refractive index of the medium above
