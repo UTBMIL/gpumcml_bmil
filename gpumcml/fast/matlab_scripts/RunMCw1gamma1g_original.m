@@ -24,6 +24,9 @@ function MCoutput = RunMCw1gamma1g_original(musp_vs,g1)
         mua_d = 100;
         thi = 0;
         for musp_v = musp_vs
+            if isfile(['Test/Simulation_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
+                continue
+            end
             mus = musp_v/(1-g);
             %% Create Input File for MCML
             %             n         mua     mus     g   d    gamma
