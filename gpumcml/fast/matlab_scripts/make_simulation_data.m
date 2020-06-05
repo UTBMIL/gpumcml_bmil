@@ -14,7 +14,9 @@ musp_vs = linspace(6.5,31.1,10);
 
 for g = gs
     for musp_v_cm = musp_vs
-
+		if isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'])
+                    continue
+                end
     	RunMCw1gamma1g_original(musp_v_cm,g)
      end
 end  
@@ -25,7 +27,9 @@ close all;
 for g = gs
 	for musp_v_cm = musp_vs
 		for mua = mua_e
-
+			if isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'])
+                    		continue
+                	end	
 
 
     data = load(['Test/Simulation_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat']);
