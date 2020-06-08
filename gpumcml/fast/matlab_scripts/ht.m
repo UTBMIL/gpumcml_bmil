@@ -36,7 +36,7 @@ end
 if nargin < 4 | isempty(I)
    r=[(r(2:end) + r(1:end-1))/2 r(end)];
    I=2*pi./k(:)*r.*besselj(1,k(:)*r);
-%    I(k == 0,:)=pi*r.*r;
+   I(k == 0,:)=pi*r.*r;
    I=I - [zeros(numel(k),1) I(:,1:end-1)];
 elseif exist('w','var')
    I=I(:,w);
