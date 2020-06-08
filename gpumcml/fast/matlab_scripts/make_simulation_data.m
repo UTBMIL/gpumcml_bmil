@@ -13,7 +13,7 @@ musp_vs = linspace(35.6,60,41);
 
 
 for g = gs
-    RunMCw1gamma1g_original(musp_v_cm,g,mua_e)
+    RunMCw1gamma1g_original(musp_vs,g,mua_e)
 end  
 %%
 close all;
