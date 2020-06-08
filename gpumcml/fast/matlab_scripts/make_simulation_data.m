@@ -1,21 +1,19 @@
 clear all; close all; clc
 
-mua_e = linspace(0.28,4.55,9);
+mua_e = linspace(0.01,5,29);
 mua_d = 0;
 thi = 0;
 
 gs = [.07, 0.1, .14, .3, 0.9];
 
-musp_vs = linspace(6.5,31.1,10);
-
+% musp_vs = linspace(6.5,31.1,10);
+musp_vs = linspace(35.6,60,41);
 
 %%
 
 
 for g = gs
-    for musp_v_cm = musp_vs
-    	RunMCw1gamma1g_original(musp_v_cm,g)
-     end
+    RunMCw1gamma1g_original(musp_v_cm,g,mua_e)
 end  
 %%
 close all;
