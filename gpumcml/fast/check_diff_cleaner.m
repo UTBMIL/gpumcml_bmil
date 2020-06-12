@@ -28,8 +28,11 @@ g       = 0.71;      % scattering anisotropy
 dr_cm = dr/10;
 s_cm = s/10;
 
-f = linspace(0,10,100)
+% f = linspace(0,10,100)
 
+fx = [0 .01 .025 .05:.05:1.8];
+
+f = fx;
 
 
 
@@ -57,7 +60,7 @@ for iteration = 1:length(l_stars)
     
     data = load(['Test/Simulation_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mu_a_cm) '.mat']);
 
-    fx = [0 .01 .025 .05:.05:1.8];
+    
 
 
     r_log = [data.dr:data.dr:data.dr*data.Ndr] * 10;
@@ -70,14 +73,14 @@ for iteration = 1:length(l_stars)
     %Calculate RsFM
     RsFM = R_model_diff(mu_a,musp_v,f);
     
-    %Plot both
-    figure(2)
-    semilogy(f,RsFM,'--')
-    hold all;
-    
-    figure(1)
-    semilogy(f,SFDR_1Y)
-    hold all;
+%     %Plot both
+%     figure(2)
+%     semilogy(f,RsFM,'--')
+%     hold all;
+%     
+%     figure(1)
+%     semilogy(f,SFDR_1Y)
+%     hold all;
     
     save(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat'],'SFDR_1Y');
     save(['Test/SFDR/Model_SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat'],'SFDR_1Y');
