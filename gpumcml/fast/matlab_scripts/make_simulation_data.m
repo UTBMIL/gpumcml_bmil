@@ -39,6 +39,8 @@ for g = gs
 
 
             SFDR_1Y = ht(R_log,r_log,fx*2*pi);
+            
+            fprintf("done")
 
 
             save(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat'],'SFDR_1Y');
