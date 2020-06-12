@@ -4,10 +4,12 @@ mua_e = linspace(0.01,5,29);
 mua_d = 0;
 thi = 0;
 
-gs = [.07, 0.1, .14, .3, 0.9];
+% gs = [.07, 0.1, .14, .3, 0.9];
+gs = 0.9;
 
 % musp_vs = linspace(6.5,31.1,10);
-musp_vs = linspace(35.6,60,41);
+% musp_vs = linspace(35.6,60,41);
+musp_vs = linspace(5,35,50);
 
 %%
 
@@ -29,7 +31,7 @@ for g = gs
 
             data = load(['Test/Simulation_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat']);
 
-            fx = [.01 .025 .05:.05:1.8];
+            fx = [0 .01 .025 .05:.05:1.8];
 
 
             r_log = [data.dr:data.dr:data.dr*data.Ndr] * 10;
