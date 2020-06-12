@@ -51,24 +51,18 @@ for iteration = 1:length(l_stars)
     mu_a_cm = mu_a*10 %mm^-1 -> cm^-1
     musp_v_cm = musp_v*10 %mm^-1 -> cm^-1
     
-    [distance_cm_temp,refl_temp] = MCMLr_r(mu_a_cm,0,musp_v_cm/(1-g),0,g,dr_cm,Ndr);
+    RunMCw1gamma1g_original(musp_vs_cm,0.9,mua_cm)
     
-    refl = refl_temp(1:end-1);
-    distance_cm = distance_cm_temp(1:end-1);
-    
-    %Plot R vs. d
-    figure(3)
-    distance_mm = distance_cm * 10;    
-    
-    plot(distance_mm, refl)
-    xlabel('distance (mm)')
-    ylabel('reflectance')
-    hold all;
+    data = load(['Test/Simulation_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat']);
+
+    fx = [0 .01 .025 .05:.05:1.8];
 
 
-    %Calculate RsMC
-    RsMC = 2*pi*spatial_transform2(f, refl, distance_cm);
-%   RsMC = ht(refl,distance_cm * 10,2*pi*f)./(2*pi);
+    r_log = [data.dr:data.dr:data.dr*data.Ndr] * 10;
+    R_log = data.MCoutput.refl_r * 1/100;
+
+
+    SFDR_1Y = ht(R_log,r_log,fx*2*pi);
 
     
     %Calculate RsFM
@@ -80,8 +74,12 @@ for iteration = 1:length(l_stars)
     hold all;
     
     figure(1)
-    semilogy(f/10,RsMC)
+    semilogy(f,SFDR_1Y)
     hold all;
+    
+    save(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat'],'SFDR_1Y');
+    save(['Test/SFDR/Model_SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat'],'SFDR_1Y');
+
 end
 
 
