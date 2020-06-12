@@ -7,7 +7,7 @@ thi = 0;
 gs = 0.93;
 
 % musp_vs = linspace(6.5,31.1,10);
-musp_vs = 30;
+musp_vs = 20;
 
 %%
 
