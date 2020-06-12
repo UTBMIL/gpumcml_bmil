@@ -82,8 +82,8 @@ for iteration = 1:length(l_stars)
 %     semilogy(f,SFDR_1Y)
 %     hold all;
     
-    save(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat'],'SFDR_1Y');
-    save(['Test/SFDR/Model_SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat'],'SFDR_1Y');
+    save(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mu_a_cm) '.mat'],'SFDR_1Y');
+    save(['Test/SFDR/Model_SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mu_a_cm) '.mat'],'SFDR_1Y');
 
 end
 
