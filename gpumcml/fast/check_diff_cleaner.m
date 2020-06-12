@@ -53,9 +53,9 @@ for iteration = 1:length(l_stars)
     mu_a_cm = mu_a*10 %mm^-1 -> cm^-1
     musp_v_cm = musp_v*10 %mm^-1 -> cm^-1
     
-    RunMCw1gamma1g_original(musp_vs_cm,0.9,mua_cm)
+    RunMCw1gamma1g_original(musp_v_cm,0.9,mu_a_cm)
     
-    data = load(['Test/Simulation_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat']);
+    data = load(['Test/Simulation_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mu_a_cm) '.mat']);
 
     fx = [0 .01 .025 .05:.05:1.8];
 
