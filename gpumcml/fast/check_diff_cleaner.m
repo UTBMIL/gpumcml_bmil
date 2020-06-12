@@ -16,6 +16,8 @@ clear all; close all; clc
 
 
 %% Constants
+addpath('matlab_scripts')
+
 dr      = 0.05; %mm
 
 Ndr     = 10000*2;
@@ -35,7 +37,7 @@ f = linspace(0,10,100)
 l_stars = [0.25 0.5 1 2 4];
 
 %initialize a file where you give all the row names
-create_CONV_input_file(s_cm)
+% create_CONV_input_file(s_cm)
 
 %Instead of LUT, just storing all values in simple array for now
 RsMC_all = [];
