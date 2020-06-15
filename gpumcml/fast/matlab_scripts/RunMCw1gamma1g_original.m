@@ -15,7 +15,7 @@ function MCoutput = RunMCw1gamma1g_original(musp_vs,g1,mua_v)
     dz          = 0.01; % Spatial resolution of detection grid, z-direction [cm]
     dr          = 1*10^(-5); % Spatial resolution of detection grid, r-direction [cm]
     Ndz         = 1;   % Number of grid elements, z-direction
-    Ndr         = 1.5*10^5*3;  % Number of grid elements, r-direction
+    Ndr         = 1.5*10^5*4;  % Number of grid elements, r-direction
     Nda         = 1;    % Number of grid elements, angular-direction
 
     %% Run simulation one by one
