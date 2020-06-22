@@ -24,14 +24,15 @@ close all;
 for g = gs
 	for musp_v_cm = musp_vs
 		for mua = mua_e
-			if isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'])
-                continue
-            end
+% 			if isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'])
+%                 continue
+%             end
 
 
-            data = load(['Test/Simulation_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat']);
+            data = load(['Test_HG_Train_meters/Simulation_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat']);
 
-            fx = [0 .01 .025 .05:.05:1.8];
+%             fx = [0 .01 .025 .05:.05:1.8];
+            fx = [0.0:.05:1];
 
 
             r_log = [data.dr:data.dr:data.dr*data.Ndr] * 10;
@@ -43,7 +44,7 @@ for g = gs
             fprintf("done")
 
 
-            save(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat'],'SFDR_1Y');
+            save(['Test_HG_Train_4/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat'],'SFDR_1Y');
 		end
 	end
 end
