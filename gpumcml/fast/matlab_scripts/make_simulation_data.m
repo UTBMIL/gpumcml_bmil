@@ -1,7 +1,7 @@
 clear all; close all; clc
 
 % mua_e = linspace(0.01,5,10);
-mua_e = linspace(0.01,5,20);
+mua_e = linspace(0.01,5,5);
 mua_d = 0;
 thi = 0;
 
@@ -10,7 +10,7 @@ gs = [.1, .3, .5, 0.9];
 
 % musp_vs = linspace(6.5,31.1,10);
 % musp_vs = linspace(35.6,60,41);
-musp_vs = linspace(1.0,6,20) * 10; %cm^-1
+musp_vs = linspace(1.0,6,5) * 10; %cm^-1
 
 
 %%
