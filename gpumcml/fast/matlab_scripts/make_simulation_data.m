@@ -1,7 +1,7 @@
 clear all; close all; clc
 
 % mua_e = linspace(0.01,5,10);
-mua_e = linspace(0.01,5,29);
+mua_e = linspace(0.01,5,20);
 mua_d = 0;
 thi = 0;
 
@@ -10,7 +10,7 @@ gs = [.1, .3, .5, 0.9];
 
 % musp_vs = linspace(6.5,31.1,10);
 % musp_vs = linspace(35.6,60,41);
-musp_vs = linspace(1.0,6,50) * 10; %cm^-1
+musp_vs = linspace(1.0,6,20) * 10; %cm^-1
 
 
 %%
@@ -31,7 +31,7 @@ for g = gs
             end
 
 
-            data = load(['Test_HG_Train_meters/Simulation_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat']);
+            data = load(['Test/Simulation_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat']);
 
             fx = [0 .01 .025 .05:.05:1.8];
 %             fx = [0.0:.05:1];
