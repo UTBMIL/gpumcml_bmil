@@ -4,7 +4,9 @@ mua_e = 0.01;
 mua_d = 0;
 thi = 0;
 
-
+musp_vs = linspace(1.0,6,50) * 10;
+gammas = linspace(0.95,2.3,20);
+gs = [0.1 0.3 0.5 0.9];
 
 % gammas = linspace(0.95,1.27,6)
 % musp_vs = linspace(1.9,3.8,6) * 10 %cm^-1
@@ -18,17 +20,17 @@ thi = 0;
 %gammas = linspace(0.95,1.27,3);
 % gammas = gammas(6:end)
 % gammas = gammas(5);
-musp_vs = 2.16*10; %cm^-1
+% musp_vs = 2.16*10; %cm^-1
 % musp_vs = musp_vs(44:end);
 
 % gammas = linspace(0.95,1.27,20);
-gammas = 2.08;
+% gammas = 2.08;
 %gammas = gammas(2:end-1);
 % musp_vs = linspace(1.0,6,50) * 10; %cm^-1
 %musp_vs = musp_vs(2:end-1);
 % gs = [.07, 0.1, .14, .3];
 %gs = [0.9];
-gs = 0.93;
+% gs = 0.93;
  
 % musp_vs = musp_vs(2:end-1);
 % 
@@ -111,7 +113,7 @@ for mua_e = 0.01
                 end
                 data = load(['Test/Simulation_gamma' num2str(gam) '_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat']);
 
-                fx = [.01 .025 .05:.05:1.8];
+                fx = [0 .01 .025 .05:.05:1.8];
     %             fx = [0:.05:1];
 
 
