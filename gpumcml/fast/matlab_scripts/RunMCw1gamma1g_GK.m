@@ -69,8 +69,8 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1)
             costC=zeros(N,1);
             for time=1:N
                 
-                gGK = gmap(g1,gamma);
-                aGK = amap(g1,gamma);
+                gGK = gmap(gamma,g1);
+                aGK = amap(gamma,g1);
                 
                 randnum=epsilon(time);
                 K = aGK*gGK*(1-gGK^2)^(2*aGK)/((1 + gGK)^(2*aGK) - (1 - gGK)^(2*aGK));
