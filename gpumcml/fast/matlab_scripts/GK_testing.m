@@ -40,8 +40,8 @@ plot(allg1s, allg1s + 1)
 xlabel('g1')
 ylabel('gamma')
 %%
-F = scatteredInterpolant(allgammas',allg1s',allgs');
-F2 = scatteredInterpolant(allgammas',allg1s',allas');
+F = scatteredInterpolant(allgammas',allg1s',allgs','nearest');
+F2 = scatteredInterpolant(allgammas',allg1s',allas','nearest');
 F(gamma_goal,g1_goal)
 F2(gamma_goal,g1_goal)
 
@@ -79,10 +79,10 @@ for i = 1:length(gammas)
     gamma_goal = gammas(i);
     g1_goal = g1s(i);
     
-    if gamma_goal < 1 + g1_goal
-        continue
-    end
-    
+%     if gamma_goal < 1 + g1_goal
+%         continue
+%     end
+%     
     
     g = gmap(gamma_goal,g1_goal);
     a = amap(gamma_goal,g1_goal);
