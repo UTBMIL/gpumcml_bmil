@@ -4,9 +4,9 @@ mua_e = 0.01;
 mua_d = 0;
 thi = 0;
 
-musp_vs = linspace(1.0,6,10) * 10;
-gammas = linspace(0.95,2.3,10);
-gs = [0.1 0.9];
+musp_vs = linspace(1.0,6,20) * 10;
+gammas = linspace(0.95,2.3,15);
+gs = [0.1 0.5 0.9];
 
 for gam = gammas
     for g = gs        
