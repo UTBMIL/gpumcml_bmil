@@ -2,14 +2,14 @@
 % 2/24/2019
 % Yao Zhang
 
-function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1)
+function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
     interpolant_data = load('g_interpolant')
     gmap = interpolant_data.F;
     interpolant_data_2 = load('a_interpolant')
     amap = interpolant_data_2.F2;
 
     %% Input parameters
-    mua_v  = [0.01]; % absorption vector (cm^-1)\
+%     mua_v  = [0.01]; % absorption vector (cm^-1)\
     
     %First check if these files already all exist
     %Default assumption is they do exist

@@ -1,24 +1,26 @@
 clear all; close all; clc
 
-mua_e = 0.01;
+mua_es = linspace(0.01,5,15);
 mua_d = 0;
 thi = 0;
 
-musp_vs = linspace(1.0,6,20) * 10;
-gammas = linspace(0.95,2.3,15);
+musp_vs = linspace(1.0,6,40) * 10;
+gammas = linspace(0.95,2.3,20);
 gs = [0.1 0.5 0.9];
 
 for gam = gammas
-    for g = gs        
-        musp_v_cm = musp_vs;
-    
-        RunMCw1gamma1g_GK(gam,musp_v_cm,g)
+    for g = gs     
+        for mua_e = mua_es
+            musp_v_cm = musp_vs;
+
+            RunMCw1gamma1g_GK(gam,musp_v_cm,g,mua_e);
+        end
     end  
 end
 %%
 close all;
 
-for mua_e = 0.01
+for mua_e = mua_es
     for gam = gammas
         for g = gs
             for musp_v_cm = musp_vs
