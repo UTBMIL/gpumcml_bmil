@@ -8,6 +8,11 @@ musp_vs = linspace(1.0,6,40) * 10;
 gammas = linspace(0.95,2.3,20);
 gs = [0.1 0.5 0.9];
 
+mua_es = mua_es(1:3:end);
+musp_vs = musp_vs(1:3:end);
+gammas = gammas(1:3:end);
+
+
 for gam = gammas
     for g = gs     
         for mua_e = mua_es
