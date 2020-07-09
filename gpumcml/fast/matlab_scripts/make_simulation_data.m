@@ -6,7 +6,7 @@ thi = 0;
 
 musp_vs = linspace(1.0,6,40) * 10;
 gammas = linspace(0.95,2.3,20);
-gs = [0.1 0.5 0.9];
+gs = [0.9];
 
 mua_es = mua_es(1:3:end);
 musp_vs = musp_vs(1:3:end);
@@ -17,6 +17,13 @@ for gam = gammas
     for g = gs     
         for mua_e = mua_es
             musp_v_cm = musp_vs;
+            
+            if gam < 1 + 0.6 * g
+                continue
+            end
+            if gam > (exp(1))^(log(3)*g)
+                continue
+            end
 
             RunMCw1gamma1g_GK(gam,musp_v_cm,g,mua_e);
         end
