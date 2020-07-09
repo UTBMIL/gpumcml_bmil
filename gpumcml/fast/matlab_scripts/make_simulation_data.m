@@ -8,9 +8,9 @@ musp_vs = linspace(1.0,6,40) * 10;
 gammas = linspace(0.95,2.3,20);
 gs = [0.9];
 % 
-mua_es = mua_es(1:3:end);
-musp_vs = musp_vs(1:3:end);
-gammas = gammas(1:3:end);
+mua_es = mua_es(1:2:end);
+musp_vs = musp_vs(1:2:end);
+gammas = gammas(1:2:end);
 
 
 for gam = gammas
