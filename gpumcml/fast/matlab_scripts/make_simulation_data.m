@@ -4,14 +4,10 @@ mua_es = linspace(0.01,5,15);
 mua_d = 0;
 thi = 0;
 
-musp_vs = linspace(1.0,6,40) * 10;
-gammas = linspace(0.95,2.3,20);
+musp_vs = linspace(1.0,6,20) * 10;
+gammas = linspace(0.95,2.3,15);
 gs = [0.9];
 % 
-mua_es = mua_es(1:2:end);
-musp_vs = musp_vs(1:2:end);
-gammas = gammas(1:2:end);
-
 
 for gam = gammas
     for g = gs     
@@ -39,6 +35,14 @@ for mua_e = mua_es
                 if isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_gamma_' num2str(gam) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'])
                     continue
                 end
+		if gam < 1 + 0.6 * g
+                	continue
+            	end
+            	if gam > (exp(1))^(log(3)*g)
+                	continue
+            	end
+
+
                 data = load(['Test/Simulation_gamma' num2str(gam) '_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat']);
 
                 fx = [0 .01 .025 .05:.05:1.8];
