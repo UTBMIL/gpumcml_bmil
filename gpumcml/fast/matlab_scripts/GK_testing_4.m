@@ -90,9 +90,9 @@ gmap = interpolant_data.F;
 interpolant_data_2 = load('a_interpolant')
 amap = interpolant_data_2.F2;
 
-musp_vs = linspace(1.0,6,40) * 10;
+% musp_vs = linspace(1.0,6,40) * 10;
 gammas = linspace(0.95,2.3,20);
-gs = [0.1 0.5 0.9];
+gs = linspace(.05,.95,20);
 
 i = 1;
 
@@ -153,4 +153,16 @@ y1 = 1 + 0.6*allg1s;
 plot(allg1s,y1)
 y2 = (exp(1)).^(log(3)*dummy);
 plot(dummy,y2)
-    
+
+%%
+csvwrite('true_g1.csv',true_g1');
+csvwrite('g1_guess.csv',g1_guess');
+csvwrite('true_gamma.csv',true_gamma');
+csvwrite('gamma_guess.csv',gamma_guess');
+
+%%
+csvwrite('allg1s.csv',allg1s');
+csvwrite('allgammas.csv',allgammas');
+csvwrite('y1.csv',y1');
+csvwrite('y2.csv',y2');
+csvwrite('dummy.csv',dummy');
