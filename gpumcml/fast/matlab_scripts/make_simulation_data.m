@@ -101,7 +101,7 @@ close all;
 % gammas = linspace(0.95,1.27,20);
 
 % for mua_e = linspace(0.01,5,10);
-for mua_e = [0.01,5]
+for mua_e = mua_es
     for gam = gammas
         for g = gs
             for musp_v_cm = musp_vs
