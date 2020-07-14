@@ -1,10 +1,5 @@
 clear all; close all; clc
 
-mua_e = [0.01, 5];
-mua_d = 0;
-thi = 0;
-
-
 
 % gammas = linspace(0.95,1.27,6)
 % musp_vs = linspace(1.9,3.8,6) * 10 %cm^-1
@@ -98,7 +93,7 @@ for gam = gammas
 %         end
         musp_v_cm = musp_vs;
     
-        RunMCw1gamma1g_original(gam,musp_v_cm,g,mua_e)
+        RunMCw1gamma1g_original(gam,musp_v_cm,g,mua_es)
     end  
 end
 %%
