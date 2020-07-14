@@ -21,14 +21,22 @@ thi = 0;
 %musp_vs = 1*10; %cm^-1
 % musp_vs = musp_vs(44:end);
 
-%gammas = linspace(0.95,1.27,20);
-%gammas = gammas(2:end-1);
-gammas = 1.9;
-musp_vs = linspace(1.0,35,2) * 10; %cm^-1
-%musp_vs = musp_vs(2:end-1);
-%gs = [.07, 0.1, .14, .3];
+% %gammas = linspace(0.95,1.27,20);
+% %gammas = gammas(2:end-1);
+% gammas = 1.9;
+% musp_vs = linspace(1.0,35,2) * 10; %cm^-1
+% %musp_vs = musp_vs(2:end-1);
+% %gs = [.07, 0.1, .14, .3];
+% gs = [0.9];
+
+mua_es = linspace(0.01,5,15);
+mua_d = 0;
+thi = 0;
+
+musp_vs = linspace(1.0,35,15) * 10;
+gammas = linspace(0.95,2.3,15);
 gs = [0.9];
- 
+
 % musp_vs = musp_vs(2:end-1);
 % 
 % gs = [.85 .95];
@@ -90,7 +98,7 @@ for gam = gammas
 %         end
         musp_v_cm = musp_vs;
     
-        RunMCw1gamma1g_original(gam,musp_v_cm,g)
+        RunMCw1gamma1g_original(gam,musp_v_cm,g,mua_e)
     end  
 end
 %%

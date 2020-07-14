@@ -2,9 +2,9 @@
 % 2/24/2019
 % Yao Zhang
 
-function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
+function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
     %% Input parameters
-    mua_v  = [0.01,5]; % absorption vector (cm^-1)
+%     mua_v  = [0.01,5]; % absorption vector (cm^-1)
     
     %First check if these files already all exist
     %Default assumption is they do exist
