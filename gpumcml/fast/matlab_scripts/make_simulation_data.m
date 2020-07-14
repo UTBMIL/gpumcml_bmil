@@ -1,11 +1,11 @@
 clear all; close all; clc
 
-mua_es = linspace(0.01,5,15);
+mua_es = linspace(0.01,5,10);
 mua_d = 0;
 thi = 0;
 
-musp_vs = linspace(1.0,6,20) * 10;
-gammas = linspace(0.95,2.3,15);
+musp_vs = linspace(1.0,35,10) * 10;
+gammas = linspace(0.95,2.3,10);
 gs = [0.9];
 % 
 
