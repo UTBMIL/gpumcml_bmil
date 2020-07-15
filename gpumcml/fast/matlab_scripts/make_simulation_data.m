@@ -1,21 +1,21 @@
 clear all; close all; clc
 
-mua_es = linspace(0.01,5,29);
-mua_d = 0;
-thi = 0;
+%mua_es = linspace(0.01,5,29);
+%mua_d = 0;
+%thi = 0;
 
-musp_vs = linspace(1.0,6,83) * 10;
-gammas = linspace(0.95,2.3,48);
-gs = [0.9];
+%musp_vs = linspace(1.0,6,83) * 10;
+%gammas = linspace(0.95,2.3,48);
+%gs = [0.9];
 % 
 
-%mua_es = mua_es(1:15);
-%musp_vs = musp_vs(1:15);
-%gammas = gammas(end-16:end);
-
-%mua_es = mua_es(1:4:end);
-%musp_vs = musp_vs(1:4:end);
-%gammas = gammas(1:4:end);
+mua_es = linspace(0.01,5,20);
+% mua_d = 0;
+% thi = 0;
+% 
+musp_vs = linspace(1.0,6,40) * 10;
+gammas = linspace(0.95,2.3,20);
+gs = [0.9];
 
 for gam = gammas
     for g = gs     
