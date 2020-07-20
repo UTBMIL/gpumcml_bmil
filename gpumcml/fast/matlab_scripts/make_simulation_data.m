@@ -9,13 +9,17 @@ clear all; close all; clc
 %gs = [0.9];
 % 
 
-mua_es = linspace(0.01,5,20);
+%mua_es = linspace(0.01,5,29);
 % mua_d = 0;
 % thi = 0;
 % 
-musp_vs = linspace(1.0,6,40) * 10;
-gammas = linspace(0.95,2.3,20);
+%musp_vs = linspace(1.0,6,50) * 10;
+%gammas = linspace(1.75,2.31,20);
 gs = [0.9];
+
+musp_vs = 3.8809 * 10;
+mua_es = 3.7836;
+gammas = 1.9;
 
 for gam = gammas
     for g = gs     
