@@ -19,7 +19,8 @@ gs = [0.9];
 
 musp_vs = 3.8809 * 10;
 mua_es = 3.7836;
-gammas = linspace(0.9,1.9,10);
+% gammas = linspace(0.9,1.9,10);
+gammas = 1.9;
 
 for gam = gammas
     for g = gs     

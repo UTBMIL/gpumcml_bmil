@@ -15,7 +15,6 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
     %Default assumption is they do exist
     exist_flag = 1;
     
-    g       = g1;         % scattering anisotropy
     gammas  = gamma;      % Gamma
     for mua_e = mua_v
         mua_d = 100;
@@ -63,8 +62,7 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
         %do nothing
     else
         for Num=1:size(gamma,2)
-            g=(5*g1*gamma(Num) - 5*gamma(Num) + (25*g1^2*gamma(Num).^2 + 40*g1^2 - 50*g1*gamma(Num).^2 + 30*g1*gamma(Num) + 25*gamma(Num).^2 - 30*gamma(Num) + 9).^(1/2) + 3)/(10*g1);
-            a=g1./g;% Right value for Beta
+
 
             costC=zeros(N,1);
             for time=1:N
@@ -86,14 +84,15 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
                 hold on
                 %theoretical MHG phase function
                 cost0=linspace(-1,1,N);
-                pcost0=a*(1-g*g)./(2*(1+g*g-2*g*cost0).^(3/2))+(1-a)*3/(2)*cost0.*cost0;
+                pcost0=2*aGK*gGK*(1-gGK^2)^(2*aGK)/((1 + gGK)^(2*aGK)-(1-gGK)^(2*aGK))*1./(1 + gGK^2 - 2*gGK*cost0).^(1 + aGK);
                 plot(cost0,pcost0);
                 set(gca, 'YScale', 'log')
                 xlabel('cos(\theta)')
                 ylabel('probability')
-                legend('Sampling (Numeric/Discretized)','MHG phase function')
+                legend('Sampling (Numeric/Discretized)','GK phase function')
                 title(['g1=',num2str(g1),' gamma=',num2str(gamma(Num))])
                 xlim([-1 1])
+                ylim([10^(-3) 10^2])
             end
         end
         toc
