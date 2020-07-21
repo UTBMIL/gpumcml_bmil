@@ -141,28 +141,39 @@ ylabel('produced g1')
 
 
 %%
-immse(true_gamma,gamma_guess)
-immse(true_g1,g1_guess)
+immse(true_gamma,gamma_guess);
+immse(true_g1,g1_guess);
+
+MARE(true_gamma,gamma_guess)
+MARE(true_g1,g1_guess)
 
 
-figure()
-scatter(true_g1,true_gamma)
-hold all;
-% scatter(g1_guess,gamma_guess)
-y1 = 1 + 0.6*allg1s;
-plot(allg1s,y1)
-y2 = (exp(1)).^(log(3)*dummy);
-plot(dummy,y2)
 
-%%
-csvwrite('true_g1.csv',true_g1');
-csvwrite('g1_guess.csv',g1_guess');
-csvwrite('true_gamma.csv',true_gamma');
-csvwrite('gamma_guess.csv',gamma_guess');
 
-%%
-csvwrite('allg1s.csv',allg1s');
-csvwrite('allgammas.csv',allgammas');
-csvwrite('y1.csv',y1');
-csvwrite('y2.csv',y2');
-csvwrite('dummy.csv',dummy');
+
+% 
+% figure()
+% scatter(true_g1,true_gamma)
+% hold all;
+% % scatter(g1_guess,gamma_guess)
+% y1 = 1 + 0.6*allg1s;
+% plot(allg1s,y1)
+% y2 = (exp(1)).^(log(3)*dummy);
+% plot(dummy,y2)
+% 
+% %%
+% csvwrite('true_g1.csv',true_g1');
+% csvwrite('g1_guess.csv',g1_guess');
+% csvwrite('true_gamma.csv',true_gamma');
+% csvwrite('gamma_guess.csv',gamma_guess');
+% 
+% %%
+% csvwrite('allg1s.csv',allg1s');
+% csvwrite('allgammas.csv',allgammas');
+% csvwrite('y1.csv',y1');
+% csvwrite('y2.csv',y2');
+% csvwrite('dummy.csv',dummy');
+
+function error = MARE(x,y)
+error = mean(abs((x - y)./x));
+end
