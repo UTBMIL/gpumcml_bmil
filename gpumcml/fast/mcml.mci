@@ -12,5 +12,5 @@ mcml.mco A		# output filename, ASCII/Binary
 1			# No. of layers
 1.000000		# n for medium above
 #n mua mus g d		# One line for each layer
-1.37 5 589.796 0.9 100	# layer 1
+1.37 3.7836 388.09 0.9 100	# layer 1
 1.330000		# n for medium below

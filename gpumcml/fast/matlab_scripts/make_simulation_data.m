@@ -1,23 +1,15 @@
 clear all; close all; clc
 
-% mua_e = linspace(0.01,5,10);
-mua_e = linspace(0.01,5,29);
-mua_d = 0;
-thi = 0;
-
-%gs = [.1, .3, .5, 0.9];
+musp_vs = 3.8809 * 10;
+mua_es = 3.7836;
+% gammas = linspace(0.9,1.9,10);
+gammas = 1.9;
 gs = 0.9;
-
-% musp_vs = linspace(6.5,31.1,10);
-% musp_vs = linspace(35.6,60,41);
-musp_vs = linspace(1.0,6,50) * 10; %cm^-1
-
-
 %%
 
 
 for g = gs
-    RunMCw1gamma1g_original(musp_vs,g,mua_e)
+    RunMCw1gamma1g_original(musp_vs,g,mua_es)
 end  
 %%
 close all;
@@ -25,8 +17,8 @@ close all;
 
 for g = gs
 	for musp_v_cm = musp_vs
-		for mua = mua_e
-			if isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'])
+		for mua = mua_es
+			if isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua) '.mat'])
                 continue
             end
 
