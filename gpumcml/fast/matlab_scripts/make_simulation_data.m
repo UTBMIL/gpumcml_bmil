@@ -35,7 +35,7 @@ for mua_e = mua_es
                 if isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_gamma_' num2str(gam) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'])
                     continue
                 end
-		if gam < 1 + 0.6 * g
+                if gam < 1 + 0.6 * g
                 	continue
             	end
             	if gam > (exp(1))^(log(3)*g)

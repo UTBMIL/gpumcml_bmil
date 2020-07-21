@@ -37,7 +37,7 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
     end
     
 
-    Flag_Plot = 0; % 1: Plot the histogram of the scattering angles to check the phase function; 0: no plotting
+    Flag_Plot = 1; % 1: Plot the histogram of the scattering angles to check the phase function; 0: no plotting
 
     % musp_vs = [30];% reduced scattering vector (cm^-1)  (Test one value here but you can have multiple values)
     
