@@ -96,6 +96,12 @@ mua_es = 0.082*10;
 musp_vs = 4.1548*10;
 
 
+gs = [0.9];
+
+musp_vs = 3.8809 * 10;
+mua_es = 3.7836;
+gammas = linspace(0.9,1.9,10);
+
 for gam = gammas
     for g = gs
         if gam > 1 + g
