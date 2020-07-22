@@ -17,8 +17,6 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
     
     gammas  = gamma;      % Gamma
     for mua_e = mua_v
-        mua_d = 100;
-        thi = 0;
         for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
             for musp_v = musp_vs
                 if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
