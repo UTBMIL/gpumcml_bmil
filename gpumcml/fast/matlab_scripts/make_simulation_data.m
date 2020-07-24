@@ -10,8 +10,8 @@ gammas = 1.9;
 gs = 0.9234;
 gammas = 1.874;
 
-gs = [0.9];
-gammas = linspace(0.9,1.9,10);
+%gs = [0.9];
+%gammas = linspace(0.9,1.9,10);
 
 
 for gam = gammas
