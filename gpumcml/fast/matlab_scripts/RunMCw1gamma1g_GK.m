@@ -69,9 +69,7 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
                 
                 gGK = gmap(gamma,g1);
                 aGK = amap(gamma,g1);
-               
-		aGK = 1/2;
-		gGK = 0.9; 
+                
                 randnum=epsilon(time);
                 K = aGK*gGK*(1-gGK^2)^(2*aGK)/((1 + gGK)^(2*aGK) - (1 - gGK)^(2*aGK));
                 leci = aGK * gGK * randnum/K + (1 + gGK)^(-2*aGK);

@@ -22,6 +22,10 @@ mua_es = 3.7836;
 % gammas = linspace(0.9,1.9,10);
 gammas = 1.9;
 
+
+gs = [0.9];
+gammas = linspace(0.9,1.9,10);
+
 for gam = gammas
     for g = gs     
         for mua_e = mua_es
