@@ -2,19 +2,15 @@
 % 2/24/2019
 % Yao Zhang
 
-function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
+function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
     %% Input parameters
-    mua_v  = [0.01]; % absorption vector (cm^-1)
+%     mua_v  = [0.01,5]; % absorption vector (cm^-1)
     
     %First check if these files already all exist
     %Default assumption is they do exist
     exist_flag = 1;
-    
-    g       = g1;         % scattering anisotropy
     gammas  = gamma;      % Gamma
     for mua_e = mua_v
-        mua_d = 100;
-        thi = 0;
         for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
             for musp_v = musp_vs
                 if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
@@ -32,7 +28,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1)
     end
     
 
-    Flag_Plot = 0; % 1: Plot the histogram of the scattering angles to check the phase function; 0: no plotting
+    Flag_Plot = 1; % 1: Plot the histogram of the scattering angles to check the phase function; 0: no plotting
 
     % musp_vs = [30];% reduced scattering vector (cm^-1)  (Test one value here but you can have multiple values)
     
