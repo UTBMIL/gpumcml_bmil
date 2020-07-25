@@ -19,7 +19,7 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
     for mua_e = mua_v
         for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
             for musp_v = musp_vs
-                if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
+                if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '_GK.mat'])
                     continue;
                 else
                     exist_flag = 0;
@@ -56,7 +56,7 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
     epsilon=linspace(0,1,N); % Uniform Distribution
     A=[];
 
-    if isfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'])
+    if isfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '_GK.txt'])
         %do nothing
     else
         for Num=1:size(gamma,2)
@@ -96,7 +96,7 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
         end
         toc
 
-        fileID = fopen(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'],'w');
+        fileID = fopen(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '_GK.txt'],'w');
         formatSpec='%8.6f \n';
         fprintf(fileID,formatSpec,A'); % Very important!!! Pay attention to the writing format!
         fclose(fileID);
@@ -105,7 +105,7 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
 
 
     %% Always run this to replace data.txt with the desired inverse CDF file
-    copyfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'],'data.txt')
+    copyfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '_GK.txt'],'data.txt')
 
 
     %% Run simulation one by one
@@ -116,7 +116,7 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
         thi = 0;
         for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
             for musp_v = musp_vs
-                if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
+                if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '_GK.mat'])
                     continue;
                 end
                 
@@ -149,7 +149,7 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
                 %         ylabel('Diffuse reflectance R_d (cm^-^2)')
                 %         title(['musp =', num2str(musp_v/10),' mm^-^1 g1 =',num2str(g), ' gamma =',num2str(gamma)])
 
-                save(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'],'dr','MCoutput','Ndr')
+                save(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '_GK.mat'],'dr','MCoutput','Ndr')
             end
         end
     end
