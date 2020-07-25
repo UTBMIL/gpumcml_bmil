@@ -3,8 +3,8 @@ clear all; close all; clc
 musp_vs = 3.8809 * 10;
 mua_es = 3.7836;
 
-gammas = 1.874;
-gs = 0.9234;
+gammas = 1.9;
+gs = 0.9;
 
 for gam = gammas
     for g = gs     
