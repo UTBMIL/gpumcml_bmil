@@ -56,14 +56,16 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
     epsilon=linspace(0,1,N); % Uniform Distribution
     A=[];
 
+    gGK = gmap(gamma,g1);
+    aGK = amap(gamma,g1);
+    [g1debug, gammadebug] = forward_GK_parameters(gGK,aGK) 
+
     if isfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '_GK.txt'])
         %do nothing
     else
         for Num=1:size(gamma,2)
             
-            gGK = gmap(gamma,g1);
-            aGK = amap(gamma,g1);
-            [g1debug, gammadebug] = forward_GK_parameters(gGK,aGK) 
+            
 
 
             costC=zeros(N,1);
