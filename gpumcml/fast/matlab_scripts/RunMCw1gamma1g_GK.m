@@ -111,7 +111,7 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v)
 
 
     %% Run simulation one by one
-    g       = g1;         % scattering anisotropy
+    g       = g1debug;         % scattering anisotropy
     gammas  = gamma;      % Gamma
     for mua_e = mua_v
         mua_d = 100;
