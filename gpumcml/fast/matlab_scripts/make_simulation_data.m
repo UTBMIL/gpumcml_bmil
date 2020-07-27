@@ -3,7 +3,9 @@ clear all; close all; clc
 musp_vs = 3.8809 * 10;
 mua_es = 3.7836;
 
-gammas = 1.9;
+%gammas = 1.9;
+gammas = linspace(0.9,1.9,10);
+
 gs = 0.9;
 
 for gam = gammas
