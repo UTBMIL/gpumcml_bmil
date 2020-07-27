@@ -34,19 +34,24 @@ close all;
 %for MHG
 
 for mua_e = mua_es
-    for gam = gammas
-        for g = gs
+    for gamma = gammas
+        for g1 = gs
             for musp_v_cm = musp_vs
-                if isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_gamma_' num2str(gam) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'])
+                
+                if gamma < 1 + 0.6 * g1
                     continue
                 end
-                if gam < 1 + 0.6 * g
-                	continue
-            	end
-            	if gam > (exp(1))^(log(3)*g)
-                	continue
-            	end
+                if gamma > (exp(1))^(log(3)*g1)
+                    continue
+                end
 
+                gGK = gmap(gamma,g1);
+                aGK = amap(gamma,g1);
+                [g, gam] = forward_GK_parameters(gGK,aGK);
+                
+                if isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_gamma_' num2str(gam) '_g_' num2str(g) '_mua_' num2str(mua_e) '_GK.mat'])
+                    continue
+                end
 
                 data = load(['Test/Simulation_gamma' num2str(gam) '_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat']);
 
