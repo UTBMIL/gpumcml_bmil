@@ -5,12 +5,23 @@ close all; clear all; clc
 g1_goal = 0.93;
 gamma_goal = 2.08;
 
-ptsintab = 50;
+ptsintab = 100;
 
 gs = linspace(0.001,0.999,ptsintab);
-% as = logspace(log10(0.1),log10(0.9),50);
+% gs = logspace(log10(0.999),log10(0.001),ptsintab);
+as = logspace(log10(1),log10(12),ptsintab) - 1.5;
 % as = 0.5;
-as = linspace(-0.5,11,ptsintab);
+% as = linspace(-0.5,11,ptsintab);
+
+% n = 50;
+% a = 10;
+% lower = -0.5;
+% upper = 11;
+% temp = exp(linspace(log(1)*a,log(1.05)*a,n))
+% % re-scale to be between 0 and 1
+% temp_01 = temp/max(temp) - min(temp)/max(temp)
+% % re-scale to be between your limits (i.e. 1 and 1.05)
+% as = temp_01*(upper-lower) + lower
 
 allgs = zeros(1,length(gs)*length(as));
 allas = zeros(1,length(gs)*length(as));
@@ -33,10 +44,13 @@ for g = gs
     end
 end
 
-%%
-close all;
 
-scatter(allg1s, allgammas)
+close all;
+pointsize = 10;
+
+scatter(allg1s, allgammas,pointsize,allas)
+colorbar
+
 hold all;
 % plot(allg1s, allg1s + 1)
 
