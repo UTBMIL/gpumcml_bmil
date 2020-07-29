@@ -1,8 +1,8 @@
 clear all; close all; clc
 
-interpolant_data = load('g_interpolant')
+interpolant_data = load('g_interpolant');
 gmap = interpolant_data.F;
-interpolant_data_2 = load('a_interpolant')
+interpolant_data_2 = load('a_interpolant');
 amap = interpolant_data_2.F2;
 
 musp_vs = 3*10;
