@@ -5,13 +5,13 @@ gmap = interpolant_data.F;
 interpolant_data_2 = load('a_interpolant')
 amap = interpolant_data_2.F2;
 
-musp_vs = 3*10;
-mua_es = 0.01;
+musp_vs = 3.338*10;
+mua_es = 3.56;
 
 %gammas = 1.9;
-gammas = 0.99;
+gammas = [0.95 1.3];
 
-gs = 0.1;
+gs = 0.9;
 
 for gamma = gammas
     for g1 = gs
