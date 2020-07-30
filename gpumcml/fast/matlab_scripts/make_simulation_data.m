@@ -1,18 +1,12 @@
 clear all; close all; clc
 
-gs = [0.9];
+musp_vs = 3.338*10;
+mua_es = 3.56;
 
-musp_vs = 3.8809 * 10;
-mua_es = 3.7836;
-% gammas = linspace(0.9,1.9,10);
-gammas = 1.9;
+%gammas = 1.9;
+gammas = [0.5 0.7 0.95 1.3];
 
-gs = 0.9234;
-gammas = 1.874;
-
-%gs = [0.9];
-%gammas = linspace(0.9,1.9,10);
-
+gs = 0.9;
 
 for gam = gammas
     for g = gs
@@ -42,7 +36,7 @@ for mua_e = mua_es
                 end
                 data = load(['Test/Simulation_gamma' num2str(gam) '_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat']);
 
-                fx = [.01 .025 .05:.05:1.8];
+                fx = [0 .01 .025 .05:.05:1.8];
     %             fx = [0:.05:1];
 
 
