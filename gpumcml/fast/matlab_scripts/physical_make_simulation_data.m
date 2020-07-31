@@ -62,7 +62,7 @@ for mua_e = 0.01
         end
         data = load(['Test/Simulation_gamma' num2str(gam) '_musp_' num2str(musp_v_cm) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat']);
 
-        fx = [.01 .025 .05:.05:1.8];
+        fx = [0 .01 .025 .05:.05:1.8];
 
         r_log = [data.dr:data.dr:data.dr*data.Ndr] * 10;
         R_log = data.MCoutput.refl_r * 1/100;
