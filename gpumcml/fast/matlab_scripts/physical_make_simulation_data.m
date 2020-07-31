@@ -1,5 +1,10 @@
 clear all; close all; clc
 
+interpolant_data = load('g_interpolant');
+gmap = interpolant_data.F;
+interpolant_data_2 = load('a_interpolant');
+amap = interpolant_data_2.F2;
+
 mua_e = 0.01;
 mua_d = 0;
 thi = 0;
