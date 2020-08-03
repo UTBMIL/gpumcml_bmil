@@ -7,13 +7,21 @@ amap = interpolant_data_2.F2;
 
 musp_vs = linspace(5,60,50);
 mua_es = linspace(.01,5,29);
-gammas = union(union(linspace(0.7,0.95,6), linspace(0.95,2,30)),linspace(2,2.2,6));
+gammas = [linspace(0.95,2,30) linspace(2,2.2,6)];
 
-gs = 0.9;
+gs = [0.1 0.3 0.5 0.9];
+
+%musp_vs = linspace(5,60,5);
+%mua_es = linspace(.01,5,7);
+%gammas = linspace(0.95,2.2,5);
+%gs = 0.9;
+
+%gammas = linspace(2,2.2,6);
 
 musp_vs = musp_vs(1:2:end);
 mua_es = mua_es(1:2:end);
 gammas = gammas(1:2:end);
+
 
 for gamma = gammas
     for g1 = gs
