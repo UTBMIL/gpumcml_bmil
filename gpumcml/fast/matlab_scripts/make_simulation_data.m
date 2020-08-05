@@ -4,19 +4,18 @@ mua_e = linspace(0.01,5,29);
 
 gammas = 1.9;
 
-% gs = [.1, .3, .5, 0.9];
-gs = 0.9;
+gs = [.1, .3, .5, 0.9];
+%gs = 0.9;
 
 musp_vs = linspace(1.0,6,50) * 10; %cm^-1
 
-%musp_vs = [musp_vs linspace(60,90,30)];
+musp_vs = [musp_vs linspace(60,90,30) linspace(90,100,10)];
 
 %musp_vs = linspace(60,90,30)
 
-mua_e = mua_e(1:4:end);
-musp_vs = musp_vs(1:6:end);
+mua_e = mua_e(1:2:end);
+musp_vs = musp_vs(1:2:end);
 
-musp_vs = [300];
 
 
 for g = gs
