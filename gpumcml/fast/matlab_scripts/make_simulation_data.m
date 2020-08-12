@@ -5,15 +5,21 @@ gmap = interpolant_data.F;
 interpolant_data_2 = load('a_interpolant');
 amap = interpolant_data_2.F2;
 
-musp_vs = [linspace(5,60,50) linspace(60,100,20)];
-mua_es = [linspace(.01,5,29) 6 7];
-gammas = [linspace(0.7,0.95,6) linspace(0.95,2,30) linspace(2,2.2,6)];
+musp_vs = [linspace(5,60,50) linspace(60,100,20) linspace(100, 200, 20)];
+%mua_es = [linspace(.01,5,29) 6 7];
+mua_es = 0.01;
+gammas = [linspace(0.62, 0.7, 6) linspace(0.7,0.95,6) linspace(0.95,2,30) linspace(2,2.2,6)];
 
-gs = [0.1 0.3 0.5 0.9];
+%gs = [0.1 0.3 0.5 0.9];
+gs = 0.9;
 
+%musp_vs = musp_vs(1:2:end);
+%mua_es = mua_es(1:2:end);
+%gammas = gammas(1:2:end);
+
+gammas = linspace(0.63, 0.7, 3);
 musp_vs = musp_vs(2:10:end);
-mua_es = mua_es(2:7:end);
-gammas = gammas(2:7:end);
+%gammas = gammas(2:8:end);
 
 %gammas = gammas(14);
 
