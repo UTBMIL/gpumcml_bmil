@@ -19,10 +19,12 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v, thi_v)
     for mua_e = mua_v
         for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
             for musp_v = musp_vs
-                if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
-                    continue;
-                else
-                    exist_flag = 0;
+                for thi = thi_v
+                    if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '_thi_' num2str(thi) '.mat'])
+                        continue;
+                    else
+                        exist_flag = 0;
+                    end
                 end
             end
         end
@@ -120,7 +122,7 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v, thi_v)
         for thi = thi_v
             for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
                 for musp_v = musp_vs
-                    if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '_GK.mat'])
+                    if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '_thi_' num2str(thi) '.mat'])
                         continue;
                     end
 
