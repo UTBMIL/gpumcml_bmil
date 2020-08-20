@@ -2,7 +2,7 @@
 % 2/24/2019
 % Yao Zhang
 
-function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v, thi)
+function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v, thi_v)
     %% Input parameters
 %     mua_v  = [0.01,5]; % absorption vector (cm^-1)
     
@@ -110,43 +110,44 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v, thi)
     gammas  = gamma;      % Gamma
     for mua_e = mua_v
         mua_d = 100;
-%         thi = 0;
-        for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
-            for musp_v = musp_vs
-                if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
-                    continue;
+        for thi = thi_v
+            for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
+                for musp_v = musp_vs
+                    if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
+                        continue;
+                    end
+
+
+                    mus = musp_v/(1-g);
+                    %% Create Input File for MCML
+                    %             n         mua     mus     g   d    gamma
+                    if thi == 0
+                        layers = [1.37      mua_e   mus     g   1E2 1]; % One gamma can use the same exe file
+                    else
+                        layers = [1.37      mua_e   mus     g   thi  1;
+                            1.37      mua_d   mus     g   1E9  1];
+                    end
+
+                    create_MCML_input_file('mcml','data.txt',photons,layers,n_above,n_below,dz,dr,Ndz,Ndr,Nda);
+
+                    %% Run GPUMCML
+                    system('./gpumcml.sm_20 mcml.mci') %% Random Seed %% remember to change the data.txt and the name of the program!
+
+                    movefile('mcml.mco',['mcml_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '.mco'])
+
+                    MCoutput = read_file_mco(['mcml_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '.mco']);
+
+                    %% Plot the simulation results
+                    %         figure
+                    %         r = 0:dr:dr*Ndr-dr;
+                    %         Rd_r = MCoutput.refl_r;
+                    %         semilogy(r,Rd_r,'--'); % Rd_r from MCML simulation output
+                    %         xlabel('Radius r [cm]')
+                    %         ylabel('Diffuse reflectance R_d (cm^-^2)')
+                    %         title(['musp =', num2str(musp_v/10),' mm^-^1 g1 =',num2str(g), ' gamma =',num2str(gamma)])
+
+                    save(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '_thi_' num2str(thi) '.mat'],'dr','MCoutput','Ndr')
                 end
-                
-                
-                mus = musp_v/(1-g);
-                %% Create Input File for MCML
-                %             n         mua     mus     g   d    gamma
-                if thi == 0
-                    layers = [1.37      mua_e   mus     g   1E2 1]; % One gamma can use the same exe file
-                else
-                    layers = [1.37      mua_e   mus     g   thi  1;
-                        1.37      mua_d   mus     g   1E9  1];
-                end
-
-                create_MCML_input_file('mcml','data.txt',photons,layers,n_above,n_below,dz,dr,Ndz,Ndr,Nda);
-
-                %% Run GPUMCML
-                system('./gpumcml.sm_20 mcml.mci') %% Random Seed %% remember to change the data.txt and the name of the program!
-
-                movefile('mcml.mco',['mcml_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '.mco'])
-
-                MCoutput = read_file_mco(['mcml_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '.mco']);
-
-                %% Plot the simulation results
-                %         figure
-                %         r = 0:dr:dr*Ndr-dr;
-                %         Rd_r = MCoutput.refl_r;
-                %         semilogy(r,Rd_r,'--'); % Rd_r from MCML simulation output
-                %         xlabel('Radius r [cm]')
-                %         ylabel('Diffuse reflectance R_d (cm^-^2)')
-                %         title(['musp =', num2str(musp_v/10),' mm^-^1 g1 =',num2str(g), ' gamma =',num2str(gamma)])
-
-                save(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'],'dr','MCoutput','Ndr')
             end
         end
     end
