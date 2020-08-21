@@ -29,7 +29,7 @@ amap = interpolant_data_2.F2;
 % %g = 0.9;
 
 musp_vs = 20;
-g = 0.9;
+gs = 0.9;
 mua_es = 0.01;
 gammas = 2.14;
 thi_v = [0.05, 0.2, 100];
