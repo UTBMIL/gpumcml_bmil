@@ -28,11 +28,11 @@ amap = interpolant_data_2.F2;
 % 
 % %g = 0.9;
 
-musp_vs = 20;
-gs = 0.9;
+musp_vs = 30;
+gs = 0.1;
 mua_es = 0.01;
-gammas = 2.14;
-thi_v = [0.05, 0.2, 100];
+gammas = 0.99;
+thi_v = [0.025, 0.05, 0.2, 100];
 
 for gamma = gammas
     for g1 = gs
