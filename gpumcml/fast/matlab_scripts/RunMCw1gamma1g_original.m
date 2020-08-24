@@ -126,8 +126,9 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v, thi_v)
                     if thi == 0
                         layers = [1.37      mua_e   mus     g   1E2 1]; % One gamma can use the same exe file
                     else
-                        layers = [1.37      mua_e   mus     g   thi  1;
-                            1.37      mua_d   mus     g   1E2  1];
+                        layers = [1.523      0.01   mus     g   0.1  1;
+                            1.37      mua_e   mus     g   thi  1;
+                            1.37      mua_d   mus     g   1E9  1];
                     end
 
                     create_MCML_input_file('mcml','data.txt',photons,layers,n_above,n_below,dz,dr,Ndz,Ndr,Nda);
