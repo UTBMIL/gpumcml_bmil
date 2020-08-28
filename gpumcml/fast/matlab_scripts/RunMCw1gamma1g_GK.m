@@ -133,7 +133,7 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v, thi_v)
                     if thi == 0
                         layers = [1.37      mua_e   mus     g   1E2 1]; % One gamma can use the same exe file
                     else
-                        layers = [1.523      0.001   0.001     g   0.1  1;
+                        layers = [1.523      0.01   5     g   0.1  1;
                             1.37      mua_e   mus     g   thi  1;
                             1.37      mua_d   40/(1-g)     g   1E2  1];
                     end
