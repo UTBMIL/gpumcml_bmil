@@ -51,7 +51,10 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
     A=[];
 
     if isfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'])
-        %do nothing
+        if gamma <= 1 + g1
+            original_flag = 1;
+        else
+            original_flag = 0;
     else
         if gamma <= 1 + g1
             original_flag = 1;
