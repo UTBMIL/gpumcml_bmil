@@ -54,6 +54,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
         %do nothing
     else
         if gamma <= 1 + g1
+            original_flag = 1;
             for Num=1:size(gamma,2)
                 g=(5*g1*gamma(Num) - 5*gamma(Num) + (25*g1^2*gamma(Num).^2 + 40*g1^2 - 50*g1*gamma(Num).^2 + 30*g1*gamma(Num) + 25*gamma(Num).^2 - 30*gamma(Num) + 9).^(1/2) + 3)/(10*g1);
                 a=g1./g;% Right value for Beta
@@ -94,6 +95,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
             end
             toc
         else
+            original_flag = 0;
             interpolant_data = load('g_interpolant')
             gmap = interpolant_data.F;
             interpolant_data_2 = load('a_interpolant')
@@ -154,7 +156,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
 
 
     %% Run simulation one by one
-    if gamma <= 1 + g1
+    if original_flag == 1
         g       = g1; % scattering anisotropy
     else
         g = g1debug;
