@@ -55,6 +55,13 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
             original_flag = 1;
         else
             original_flag = 0;
+            interpolant_data = load('g_interpolant');
+            gmap = interpolant_data.F;
+            interpolant_data_2 = load('a_interpolant');
+            amap = interpolant_data_2.F2;
+            gGK = gmap(gamma,g1);
+            aGK = amap(gamma,g1);
+            [g1debug, gammadebug] = forward_GK_parameters(gGK,aGK);
         end
     else
         if gamma <= 1 + g1
