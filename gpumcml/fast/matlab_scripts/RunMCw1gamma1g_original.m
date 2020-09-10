@@ -53,45 +53,93 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
     if isfile(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'])
         %do nothing
     else
-        for Num=1:size(gamma,2)
-            g=(5*g1*gamma(Num) - 5*gamma(Num) + (25*g1^2*gamma(Num).^2 + 40*g1^2 - 50*g1*gamma(Num).^2 + 30*g1*gamma(Num) + 25*gamma(Num).^2 - 30*gamma(Num) + 9).^(1/2) + 3)/(10*g1);
-            a=g1./g;% Right value for Beta
+        if gamma <= 1 + g1
+            for Num=1:size(gamma,2)
+                g=(5*g1*gamma(Num) - 5*gamma(Num) + (25*g1^2*gamma(Num).^2 + 40*g1^2 - 50*g1*gamma(Num).^2 + 30*g1*gamma(Num) + 25*gamma(Num).^2 - 30*gamma(Num) + 9).^(1/2) + 3)/(10*g1);
+                a=g1./g;% Right value for Beta
 
-            costC=zeros(N,1);
-            for time=1:N
-                randnum=epsilon(time);
-                costT = 0;
-                for x=linspace(-1,1,N)
-                    derror = randnum-(a*(1-g*g)/(2*g)*((1+g*g-2*g*x)^(-0.5)-(1+g*g+2*g)^(-0.5))+(1-a)*(x*x*x+1)/(2));
-                    if derror>0
-                        costT = x;
-                        continue
-                    else
-                        costT = (x + costT)/2;
-                        break
+                costC=zeros(N,1);
+                for time=1:N
+                    randnum=epsilon(time);
+                    costT = 0;
+                    for x=linspace(-1,1,N)
+                        derror = randnum-(a*(1-g*g)/(2*g)*((1+g*g-2*g*x)^(-0.5)-(1+g*g+2*g)^(-0.5))+(1-a)*(x*x*x+1)/(2));
+                        if derror>0
+                            costT = x;
+                            continue
+                        else
+                            costT = (x + costT)/2;
+                            break
+                        end
                     end
+                    costC(time)=costT;
                 end
-                costC(time)=costT;
+                A=[A costC];
+                % Plot
+                if Flag_Plot
+                    figure
+                    h0=histogram(costC,21,'Normalization','pdf');
+                    hold on
+                    %theoretical MHG phase function
+                    cost0=linspace(-1,1,N);
+                    pcost0=a*(1-g*g)./(2*(1+g*g-2*g*cost0).^(3/2))+(1-a)*3/(2)*cost0.*cost0;
+                    plot(cost0,pcost0);
+                    set(gca, 'YScale', 'log')
+                    xlabel('cos(\theta)')
+                    ylabel('probability')
+                    legend('Sampling (Numeric/Discretized)','MHG phase function')
+                    title(['g1=',num2str(g1),' gamma=',num2str(gamma(Num))])
+                    xlim([-1 1])
+                end
             end
-            A=[A costC];
-            % Plot
-            if Flag_Plot
-                figure
-                h0=histogram(costC,21,'Normalization','pdf');
-                hold on
-                %theoretical MHG phase function
-                cost0=linspace(-1,1,N);
-                pcost0=a*(1-g*g)./(2*(1+g*g-2*g*cost0).^(3/2))+(1-a)*3/(2)*cost0.*cost0;
-                plot(cost0,pcost0);
-                set(gca, 'YScale', 'log')
-                xlabel('cos(\theta)')
-                ylabel('probability')
-                legend('Sampling (Numeric/Discretized)','MHG phase function')
-                title(['g1=',num2str(g1),' gamma=',num2str(gamma(Num))])
-                xlim([-1 1])
+            toc
+        else
+            interpolant_data = load('g_interpolant')
+            gmap = interpolant_data.F;
+            interpolant_data_2 = load('a_interpolant')
+            amap = interpolant_data_2.F2;
+            gGK = gmap(gamma,g1);
+            aGK = amap(gamma,g1);
+            [g1debug, gammadebug] = forward_GK_parameters(gGK,aGK);
+
+            
+            for Num=1:size(gamma,2)
+            
+            
+
+
+                costC=zeros(N,1);
+                for time=1:N
+
+
+
+                    randnum=epsilon(time);
+                    K = aGK*gGK*(1-gGK^2)^(2*aGK)/((1 + gGK)^(2*aGK) - (1 - gGK)^(2*aGK));
+                    leci = aGK * gGK * randnum/K + (1 + gGK)^(-2*aGK);
+                    costT = 1/(2*gGK)*(1 + gGK^2 - 1/(leci^(1/aGK)));
+                    costC(time)=costT;
+                end
+                A=[A costC];
+                % Plot
+                if Flag_Plot
+                    figure
+                    h0=histogram(costC,21,'Normalization','pdf');
+                    hold on
+                    %theoretical MHG phase function
+                    cost0=linspace(-1,1,N);
+                    pcost0=2*aGK*gGK*(1-gGK^2)^(2*aGK)/((1 + gGK)^(2*aGK)-(1-gGK)^(2*aGK))*1./(1 + gGK^2 - 2*gGK*cost0).^(1 + aGK);
+                    plot(cost0,pcost0);
+                    set(gca, 'YScale', 'log')
+                    xlabel('cos(\theta)')
+                    ylabel('probability')
+                    legend('Sampling (Numeric/Discretized)','GK phase function')
+                    title(['g1=',num2str(g1),' gamma=',num2str(gamma(Num))])
+                    xlim([-1 1])
+                    ylim([10^(-3) 10^2])
+                end
             end
+            toc
         end
-        toc
 
         fileID = fopen(['CDF_g_' num2str(g1) 'gamma_' num2str(gamma) '.txt'],'w');
         formatSpec='%8.6f \n';
@@ -106,7 +154,12 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
 
 
     %% Run simulation one by one
-    g       = g1;         % scattering anisotropy
+    if gamma <= 1 + g1
+        g       = g1; % scattering anisotropy
+    else
+        g = g1debug;
+    end
+    
     gammas  = gamma;      % Gamma
     for mua_e = mua_v
         mua_d = 100;

@@ -40,7 +40,7 @@ for gamma = gammas
                 aGK = amap(gamma,g1);
                 [g, gam] = forward_GK_parameters(gGK,aGK);
 
-                RunMCw1gamma1g_GK(gam,musp_v_cm,g,mua_e);
+                RunMCw1gamma1g_original(gam,musp_v_cm,g,mua_e);
             end
             
         end
