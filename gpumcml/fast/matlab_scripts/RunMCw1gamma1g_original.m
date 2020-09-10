@@ -55,6 +55,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
             original_flag = 1;
         else
             original_flag = 0;
+        end
     else
         if gamma <= 1 + g1
             original_flag = 1;
