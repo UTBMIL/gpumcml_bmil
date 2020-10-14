@@ -188,8 +188,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
                 %% Create Input File for MCML
                 %             n         mua     mus     g   d    gamma
                 if thi == 0
-                    layers = [1.523      0.01   5     0.9   0.1 1;
-                        1.37      mua_e   mus     g   1E2 1]; % One gamma can use the same exe file
+                    layers = [1.37      mua_e   mus     g   1E9 1]; % One gamma can use the same exe file
                 else
                     layers = [1.37      mua_e   mus     g   thi  1;
                         1.37      mua_d   mus     g   1E9  1];
