@@ -6,19 +6,14 @@ interpolant_data_2 = load('a_interpolant');
 amap = interpolant_data_2.F2;
 
 musp_vs = [linspace(5,60,50)];
-mua_es = 0.01;
-% gammas = [linspace(0.62, 0.7, 6) linspace(0.7,0.95,6) linspace(0.95,2,30) linspace(2,2.2,6)];
+mua_es = linspace(.01,5,29);
 gammas = [linspace(0.95,2,30) linspace(2,2.2,6)];
 
+gs = [0.1 0.3 0.5 0.9];
+%gs = 0.1;
 
-%gs = [0.1 0.3 0.5 0.9];
-gs = 0.9;
-
-musp_prefix = [0.5 linspace(1,5,5)];
-% musp_prefix = musp_prefix(1:2:end);
-
-musp_vs = musp_prefix;
-musp_vs = 0.5;
+musp_vs = musp_vs(1:2:end);
+mua_es = mua_es(1:2:end);
 gammas = gammas(1:2:end);
 
 
