@@ -40,7 +40,8 @@ gammas = linspace(0.96,2.19,9);
 
 gs = [0.1 0.3 0.5 0.9];
 
-thi_v = [0.05, 0.1, 0.2, 100];
+%thi_v = [0.05, 0.1, 0.2, 100];
+thi_v = 0.1;
 
 for gamma = gammas
     for g1 = gs
@@ -53,7 +54,16 @@ for gamma = gammas
             end
 
             if gamma <= 1 + g1
-                RunMCw1gamma1g_original(gamma,musp_v_cm,g1,mua_e,thi_v);
+		errcount = 0;
+		count = 0;
+		while(count == errcount)
+			try
+				RunMCw1gamma1g_original(gamma,musp_v_cm,g1,mua_e,thi_v);
+			catch
+				errcount = errcount + 1
+			end
+				count = count + 1;
+		end
             else
 
 
