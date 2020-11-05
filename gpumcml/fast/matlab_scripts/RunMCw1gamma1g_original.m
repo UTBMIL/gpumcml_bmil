@@ -133,10 +133,10 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v, thi_v)
                     create_MCML_input_file('mcml','data.txt',photons,layers,n_above,n_below,dz,dr,Ndz,Ndr,Nda);
 
                     %% Run GPUMCML
-                    
+                    errcount = 0;
+                    count = 0;
                     while(count == errcount)
-                        errcount = 0;
-                        count = 0;
+                        
                         try
                             system('./gpumcml.sm_20 mcml.mci') %% Random Seed %% remember to change the data.txt and the name of the program!
 
