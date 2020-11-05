@@ -134,18 +134,31 @@ function MCoutput = RunMCw1gamma1g_GK(gamma,musp_vs,g1,mua_v, thi_v)
                         layers = [1.37      mua_e   mus     g   1E2 1]; % One gamma can use the same exe file
                     else
                         layers = [1.37      mua_e   mus     g   thi  1;
-                            1.37      mua_d   40/(1-g)     g   1E2  1];
+                            1.37      mua_d   mus     g   25  1];
                     end
 
                     create_MCML_input_file('mcml','data.txt',photons,layers,n_above,n_below,dz,dr,Ndz,Ndr,Nda);
 
                     %% Run GPUMCML
-                    system('./gpumcml.sm_20 mcml.mci') %% Random Seed %% remember to change the data.txt and the name of the program!
+                    while(count == errcount)
+                        errcount = 0;
+                        count = 0;
+                        try
+                            system('./gpumcml.sm_20 mcml.mci') %% Random Seed %% remember to change the data.txt and the name of the program!
 
-                    movefile('mcml.mco',['mcml_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '.mco'])
+                            movefile('mcml.mco',['mcml_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '.mco'])
 
-                    MCoutput = read_file_mco(['mcml_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '.mco']);
-
+                            MCoutput = read_file_mco(['mcml_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '.mco']);
+                    
+                        catch
+                            errcount = errcount + 1
+                            if errcount == 10
+                                break;
+                            end
+                        end
+                            count = count + 1;
+                    end
+                     
                     %% Plot the simulation results
                     %         figure
                     %         r = 0:dr:dr*Ndr-dr;

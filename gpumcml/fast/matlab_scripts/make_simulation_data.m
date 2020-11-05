@@ -55,19 +55,7 @@ for mua_e = mua_es
             end
 
             if gamma <= 1 + g1
-		errcount = 0;
-		count = 0;
-		while(count == errcount)
-			try
-				RunMCw1gamma1g_original(gamma,musp_v_cm,g1,mua_e,thi_v);
-			catch
-				errcount = errcount + 1
-				if errcount == 10
-					break;
-				end
-			end
-				count = count + 1;
-		end
+                RunMCw1gamma1g_original(gamma,musp_v_cm,g1,mua_e,thi_v);
             else
 
 
