@@ -28,11 +28,19 @@ amap = interpolant_data_2.F2;
 % 
 % %g = 0.9;
 
-musp_vs = 30;
-gs = 0.1;
-mua_es = 0.01;
-gammas = 0.99;
-thi_v = [0.025, 0.05, 0.2, 100];
+musp_vs = linspace(10,40,10);
+%mua_es = [linspace(.01,5,29) 6 7];
+mua_es = linspace(.28,4.5,9);
+
+% gammas = [linspace(0.62, 0.7, 6) linspace(0.7,0.95,6) linspace(0.95,2,30) linspace(2,2.2,6)];
+% gammas = [linspace(0.7,0.95,6) linspace(0.95,2,30) linspace(2,2.2,6)];
+gammas = linspace(0.96,2.19,9);
+% gammas = linspace(0.95,2,30);
+
+
+gs = [0.1 0.3 0.5 0.9];
+
+thi_v = [0.05, 0.1, 0.2, 100];
 
 for gamma = gammas
     for g1 = gs
