@@ -13,7 +13,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
     for mua_e = mua_v
         for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
             for musp_v = musp_vs
-                if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
+                if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat']) || isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_gamma_' num2str(gam) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'])
                     continue;
                 else
                     exist_flag = 0;
@@ -179,7 +179,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
         thi = 0;
         for gamma = gammas % To run multiple values of gammas we will need to change the exe.file. Please use one gamma each time for now
             for musp_v = musp_vs
-                if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])
+                if isfile(['Test/Simulation_gamma' num2str(gamma) '_musp_' num2str(musp_v) '_g_' num2str(g1) '_mua_' num2str(mua_e) '.mat'])||isfile(['Test/SFDR/SFDR_mu_' num2str(musp_v_cm) '_gamma_' num2str(gam) '_g_' num2str(g) '_mua_' num2str(mua_e) '.mat'])
                     continue;
                 end
                 
