@@ -40,7 +40,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
     dz          = 0.01; % Spatial resolution of detection grid, z-direction [cm]
     dr          = 1*10^(-5); % Spatial resolution of detection grid, r-direction [cm]
     Ndz         = 1;   % Number of grid elements, z-direction
-    Ndr         = 1.5*10^5*3*3;  % Number of grid elements, r-direction
+    Ndr         = 13.5*10^5;  % Number of grid elements, r-direction
     Nda         = 1;    % Number of grid elements, angular-direction
 
     %% Sampling for MHG to generate inverse CDF in data.txt
@@ -61,7 +61,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
             amap = interpolant_data_2.F2;
             gGK = gmap(gamma,g1);
             aGK = amap(gamma,g1);
-            [g1debug, gammadebug] = forward_GK_parameters(gGK,aGK);
+            [g1GK, gammaGK] = forward_GK_parameters(gGK,aGK);
         end
     else
         if gamma <= 1 + g1
@@ -113,7 +113,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
             amap = interpolant_data_2.F2;
             gGK = gmap(gamma,g1);
             aGK = amap(gamma,g1);
-            [g1debug, gammadebug] = forward_GK_parameters(gGK,aGK);
+            [g1GK, gammaGK] = forward_GK_parameters(gGK,aGK);
 
             
             for Num=1:size(gamma,2)
@@ -170,7 +170,7 @@ function MCoutput = RunMCw1gamma1g_original(gamma,musp_vs,g1, mua_v)
     if original_flag == 1
         g       = g1; % scattering anisotropy
     else
-        g = g1debug;
+        g = g1GK;
     end
     
     gammas  = gamma;      % Gamma
